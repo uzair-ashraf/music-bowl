@@ -1,0 +1,90 @@
+{
+  "name": "music-bowl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uzair-ashraf/music-bowl.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uzair-ashraf/music-bowl/issues"
+  },
+  "homepage": "https://github.com/uzair-ashraf/music-bowl#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bcrypt": "^4.0.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "next": "^9.3.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "reactstrap": "^8.4.1",
+    "session-file-store": "^1.4.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "10.1.0",
+    "babel-plugin-styled-components": "1.10.7",
+    "eslint": "6.8.0",
+    "eslint-config-standard": "14.1.0",
+    "eslint-plugin-cypress": "2.10.3",
+    "eslint-plugin-import": "2.20.1",
+    "eslint-plugin-node": "11.0.0",
+    "eslint-plugin-promise": "4.2.1",
+    "eslint-plugin-react": "7.18.3",
+    "eslint-plugin-standard": "4.0.1",
+    "nodemon": "2.0.2"
+  },
+  "eslintIgnore": [
+    "client/.next/",
+    "coverage/"
+  ],
+  "eslintConfig": {
+    "extends": [
+      "plugin:react/recommended",
+      "eslint:recommended",
+      "standard"
+    ],
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "parser": "babel-eslint",
+    "rules": {
+      "padded-blocks": 0,
+      "arrow-parens": [
+        "error",
+        "as-needed"
+      ],
+      "curly": [
+        "error",
+        "multi-line"
+      ],
+      "no-console": [
+        "error",
+        {
+          "allow": [
+            "warn",
+            "error"
+          ]
+        }
+      ],
+      "space-before-function-paren": [
+        "error",
+        {
+          "anonymous": "always",
+          "named": "never",
+          "asyncArrow": "always"
+        }
+      ]
+    }
+  }
+}
