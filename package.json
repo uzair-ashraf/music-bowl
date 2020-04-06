@@ -88,6 +88,17 @@
           "asyncArrow": "always"
         }
       ]
-    }
+    },
+    "overrides": [
+      {
+        "files": [
+          "client/**/*.jsx"
+        ],
+        "rules": {
+          "react/prop-types": 0,
+          "react/react-in-jsx-scope": 0
+        }
+      }
+    ]
   }
 }
