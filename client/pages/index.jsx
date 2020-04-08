@@ -5,13 +5,14 @@ import { Container, Row, Col } from 'reactstrap'
 export default class Index extends Component {
 
   render() {
-    const loginButtonStyle = {
-      display: 'flex'
+    const signUpButtonStyle = {
+      display: 'flex',
+      justifyContent: 'flex-end'
     }
     return (
       <Container>
         <Row>
-          <Col xs='12'>
+          <Col xs='12' style={{ marginTop: '2rem' }}>
             <BigButton
               content='/images/logo.png'
               color='blue'
@@ -22,7 +23,7 @@ export default class Index extends Component {
         </Row>
         <Row>
           <Col xs='12'>
-            <Col xs='6' style={loginButtonStyle}>
+            <Col xs='6'>
               <BigButton
                 content='Login'
                 color='blue'
@@ -30,16 +31,17 @@ export default class Index extends Component {
                 image={false}
               />
             </Col>
-            <Col xs="6"/>
           </Col>
-
-          <Col xs='6'>
-            <BigButton
-              content='Sign Up'
-              color='purple'
-              callBack={null}
-              image={false}
-            />
+          <Col xs='12' style={signUpButtonStyle}>
+            <Col xs="6" />
+            <Col xs='6' style={{marginRight: '2rem'}}>
+              <BigButton
+                content='Sign Up'
+                color='purple'
+                callBack={null}
+                image={false}
+              />
+            </Col>
           </Col>
         </Row>
         <style jsx global>
