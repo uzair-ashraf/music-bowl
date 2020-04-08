@@ -1,6 +1,10 @@
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 export default function BigButton(props) {
-  const { content, color, callBack, image } = props
+  const { content, color, link, image } = props
+
+  const router = useRouter()
 
   const swirlBackground = color === 'blue'
     ? '/images/blue-swirl.png'
@@ -8,11 +12,13 @@ export default function BigButton(props) {
 
   return (
     <>
-      <div className="swirl-button">
-        {
-          image ? <img src={content}/> : content
-        }
-      </div>
+      <Link href={link}>
+        <div className="swirl-button" type="submit">
+          {
+            image ? <img src={content}/> : content
+          }
+        </div>
+      </Link>
       <style jsx>
         {
         `

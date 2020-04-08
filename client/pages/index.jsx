@@ -16,7 +16,7 @@ export default class Index extends Component {
             <BigButton
               content='/images/logo.png'
               color='blue'
-              callBack={null}
+              link={'/'}
               image={true}
             />
           </Col>
@@ -27,7 +27,7 @@ export default class Index extends Component {
               <BigButton
                 content='Login'
                 color='blue'
-                callBack={null}
+                link={'login'}
                 image={false}
               />
             </Col>
@@ -38,7 +38,7 @@ export default class Index extends Component {
               <BigButton
                 content='Sign Up'
                 color='purple'
-                callBack={null}
+                link={'/signup'}
                 image={false}
               />
             </Col>
