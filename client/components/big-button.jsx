@@ -24,18 +24,6 @@ export default function BigButton(props) {
         `
         .swirl-button {
           background-image: url('${swirlBackground}');
-          border-radius: 50%;
-          height: 160px;
-          width: 160px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin: 0 auto;
-          margin-top: 2rem;
-          color: white;
-          font-family: 'Roboto';
-          font-size: 2.8rem;
-          box-shadow: 7px 13px 20px rgba(0, 0, 0, 0.25);
         }
         `
         }

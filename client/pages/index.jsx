@@ -34,7 +34,7 @@ export default class Index extends Component {
           </Col>
           <Col xs='12' style={signUpButtonStyle}>
             <Col xs="6" />
-            <Col xs='6' style={{marginRight: '2rem'}}>
+            <Col xs='6' style={{ marginRight: '2rem' }}>
               <BigButton
                 content='Sign Up'
                 color='purple'
@@ -44,18 +44,6 @@ export default class Index extends Component {
             </Col>
           </Col>
         </Row>
-        <style jsx global>
-          {
-            `
-            @font-face {
-            font-family: 'Roboto';
-            src: url('/fonts/roboto/Roboto-light.ttf');
-            font-display: auto;
-            font-style: normal;
-            }
-            `
-          }
-        </style>
       </Container>
     )
   }
