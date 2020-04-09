@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Container, Row, Col } from 'reactstrap'
 import BigButton from '../components/big-button'
+import axios from 'axios';
 
 export default class Login extends Component {
   constructor(props) {
@@ -15,10 +16,13 @@ export default class Login extends Component {
 
   handleSubmit(e) {
     console.log(this.state)
+    axios.post('/api/login', this.state)
+      .then(console.log)
+      .catch(console.error)
   }
 
   handleChange({target: { name, value} }) {
-    this.setState({[name]: value}, () => console.log(this.state))
+    this.setState({[name]: value})
   }
 
   render() {
