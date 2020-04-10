@@ -14,11 +14,14 @@ export default class Login extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     console.log(this.state)
-    axios.post('/api/login', this.state)
-      .then(console.log)
-      .catch(console.error)
+    try {
+      const response = await axios.post('/api/login', this.state)
+      console.log(response);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   handleChange({target: { name, value} }) {

@@ -4,7 +4,7 @@ const route = express.Router()
 
 route
   .post('/', (req, res) => {
-    console.log(req.body)
+    console.log(req.session)
     console.log('login endpoint hit')
   })
 
