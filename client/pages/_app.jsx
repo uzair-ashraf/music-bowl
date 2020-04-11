@@ -10,8 +10,7 @@ class MyApp extends App {
       <div>
         <Component {...pageProps} />
         <style jsx global>
-          {
-            `
+          {`
             @font-face {
             font-family: 'Roboto';
             src: url('/fonts/roboto/Roboto-light.ttf');
@@ -32,8 +31,7 @@ class MyApp extends App {
             font-size: 2.8rem;
             box-shadow: 7px 13px 20px rgba(0, 0, 0, 0.25);
             }
-            `
-          }
+            `}
         </style>
       </div>
     )

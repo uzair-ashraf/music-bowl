@@ -62,8 +62,7 @@ export default class Login extends Component {
           </Col>
         </Row>
         <style jsx>
-          {
-            `
+          {`
             #loginForm {
              background-image: url('/images/purp-swirl.png');
              width: 307px;
@@ -79,8 +78,7 @@ export default class Login extends Component {
               font-size: 1.2rem;
               border-style: none;
             }
-            `
-          }
+            `}
         </style>
       </Container>
     )
