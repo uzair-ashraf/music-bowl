@@ -1,3 +1,5 @@
 const postgres = require('postgres')
 
-module.exports = postgres(process.env.DATABASE_URL)
+const sql = postgres(process.env.DATABASE_URL)
+
+module.exports = sql

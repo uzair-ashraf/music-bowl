@@ -1,4 +1,5 @@
 require('dotenv').config()
+require('./services/db')
 const express = require('express')
 const next = require('next')
 const path = require('path')
