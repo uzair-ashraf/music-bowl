@@ -8,7 +8,9 @@ const ClientError = require('./services/errorhandling')
 const FileStore = require('session-file-store')(session)
 
 const fileStoreOptions = {
-  path: './sessions'
+  path: './sessions',
+  ttl: 144000,
+  retries: 0
 }
 
 const port = process.env.PORT || 3000
@@ -23,7 +25,8 @@ app.prepare().then(() => {
     store: new FileStore(fileStoreOptions),
     secret: process.env.SESSION_SECRET,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    rolling: true
   }))
   server.use(express.static(path.join(__dirname, '/public')))
 

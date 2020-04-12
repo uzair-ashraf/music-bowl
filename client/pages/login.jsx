@@ -16,6 +16,7 @@ export default class Login extends Component {
   }
 
   async handleSubmit(e) {
+    if(!this.state.username.length || !this.state.password.length) return;
     try {
       const {status} = await axios.post('/api/login', this.state)
       if(status === 200) {
