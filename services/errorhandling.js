@@ -1,17 +1,7 @@
 class ClientError {
-  constructor(message, status, response) {
+  constructor(message, status) {
     this.message = message
     this.status = status
-    this.response = response
-    this.sendResponse()
-  }
-
-  sendResponse() {
-    this.response
-      .status(this.status)
-      .json({
-        message: this.message
-      })
   }
 }
 

@@ -4,6 +4,7 @@ const express = require('express')
 const next = require('next')
 const path = require('path')
 const session = require('express-session')
+const ClientError = require('./services/errorhandling')
 const FileStore = require('session-file-store')(session)
 
 const fileStoreOptions = {
@@ -32,6 +33,16 @@ app.prepare().then(() => {
 
   server.all('*', (req, res) => {
     return handle(req, res)
+  })
+
+  server.use((err, req, res, next) => {
+    if (err instanceof ClientError) {
+      res.status(err.status).json({
+        message: err.message
+      })
+    } else {
+      next()
+    }
   })
 
   server.listen(port, err => {

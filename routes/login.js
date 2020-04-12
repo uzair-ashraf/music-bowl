@@ -1,11 +1,10 @@
-const express = require('express')
 const bcrypt = require('bcrypt')
-const route = express.Router()
+const route = require('express-promise-router')()
 const sql = require('../services/db')
 const ClientError = require('../services/errorhandling')
 
 route
-  .post('/', async (req, res) => {
+  .post('/', async (req, res, next) => {
     const { username, password } = req.body
     if (req.session.userId) {
       res.json({
@@ -19,14 +18,25 @@ route
       SELECT * FROM users
       WHERE username = ${username}
       `
-      if (!userData.count) {
-        throw new ClientError('Username is invalid', 401, res)
-      }
-      const hash = await bcrypt.hash(password, 12)
 
-      console.log(hash)
+      if (!userData.count) {
+        throw new ClientError('Invalid Username or Password', 401)
+      }
+
+      const [completeUserData] = userData
+      console.log(completeUserData)
+
+      const isPasswordValid = await bcrypt.compare(password, completeUserData.password)
+
+      if (!isPasswordValid) {
+        throw new ClientError('Invalid Username or Password', 401)
+      }
+
+      req.session.userId = completeUserData.user_id
+
     } catch (err) {
       console.error(err.message)
+      next(err)
     }
 
   })
