@@ -12,7 +12,6 @@ route
       })
       return
     }
-    console.log(username, password)
     try {
       const userData = await sql`
       SELECT * FROM users
@@ -24,7 +23,6 @@ route
       }
 
       const [completeUserData] = userData
-      console.log(completeUserData)
 
       const isPasswordValid = await bcrypt.compare(password, completeUserData.password)
 
@@ -33,9 +31,12 @@ route
       }
 
       req.session.userId = completeUserData.user_id
+      console.log(req.session)
+      res.json({
+        message: 'User logged in successfully!'
+      })
 
     } catch (err) {
-      console.error(err.message)
       next(err)
     }
 

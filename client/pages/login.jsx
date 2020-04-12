@@ -8,27 +8,33 @@ export default class Login extends Component {
     super(props)
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      errorMessage: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
 
   async handleSubmit(e) {
-    console.log(this.state)
     try {
-      const response = await axios.post('/api/login', this.state)
-      console.log(response);
+      const {status} = await axios.post('/api/login', this.state)
+      if(status === 200) {
+        console.log('redirect to homepage')
+      }
     } catch (err) {
-      console.error(err);
+      const {data, status} = err.response;
+      if(status === 401) {
+        this.setState({username: '', password: '', errorMessage: data.message})
+      }
     }
   }
 
   handleChange({target: { name, value} }) {
-    this.setState({[name]: value})
+    this.setState({[name]: value, errorMessage: ''})
   }
 
   render() {
+    const {errorMessage} = this.state;
     return (
       <Container>
         <Row>
@@ -44,14 +50,16 @@ export default class Login extends Component {
                 <input
                 name="username"
                 onChange={this.handleChange}
-                placeholder="Username"
+                placeholder={`${!!errorMessage.length ? 'Invalid Username or Password' : 'Username'}`}
+                value={this.state.username}
                 className="mt-4"
                 />
                 <input
                 name="password"
                 type="password"
                 onChange={this.handleChange}
-                placeholder="Password"
+                placeholder={`${!!errorMessage.length ? 'Invalid Username or Password' : 'Password'}`}
+                value={this.state.password}
                 className="mt-4 mb-4"
                 />
               </form>
@@ -77,6 +85,7 @@ export default class Login extends Component {
               border-radius: 7px;
               font-size: 1.2rem;
               border-style: none;
+              border: ${!!errorMessage.length ? '2px solid red' : 'inherit'}
             }
             `}
         </style>
