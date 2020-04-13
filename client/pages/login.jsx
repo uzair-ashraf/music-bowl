@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { Container, Row, Col } from 'reactstrap'
 import BigButton from '../components/big-button'
 import axios from 'axios';
+import { withRouter } from 'next/router'
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -20,7 +21,7 @@ export default class Login extends Component {
     try {
       const {status} = await axios.post('/api/login', this.state)
       if(status === 200) {
-        console.log('redirect to homepage')
+        this.props.router.push('/home')
       }
     } catch (err) {
       const {data, status} = err.response;
@@ -94,3 +95,5 @@ export default class Login extends Component {
     )
   }
 }
+
+export default withRouter(Login)

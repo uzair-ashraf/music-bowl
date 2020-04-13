@@ -3,6 +3,22 @@ import App from 'next/app'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 class MyApp extends App {
+
+  static async getInitialProps({ Component, ctx }) {
+
+    let pageProps = {};
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx);
+    }
+    if(typeof Window === 'undefined') {
+      console.log(ctx.req)
+      // if(ctx.req.session.userId) {
+      //   ctx.res.redirect('/home')
+      // }
+    }
+    return { pageProps };
+  }
+
   render() {
     const { Component, pageProps } = this.props
 

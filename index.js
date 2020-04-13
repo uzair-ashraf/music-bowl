@@ -32,6 +32,11 @@ app.prepare().then(() => {
 
   server.use(express.json())
 
+  // server.use((req, res, next) => {
+  //   console.log(req.path)
+  //   next()
+  // })
+
   server.use('/api', require('./routes/routes'))
 
   server.all('*', (req, res) => {
