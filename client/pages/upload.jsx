@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Container, Row, Col } from 'reactstrap'
 import requireAuth from '../../services/require-auth'
 import BigButton from '../components/big-button'
+import SmallButton from '../components/small-button'
 import Heading from '../components/heading'
 
 export default class Upload extends Component {
@@ -9,9 +10,11 @@ export default class Upload extends Component {
     super(props)
     this.state = {
       url: '',
-      genres: []
+      genres: [],
+      selectedGenre: null
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleUrlTest = this.handleUrlTest.bind(this)
   }
 
   static async getInitialProps(ctx) {
@@ -30,7 +33,26 @@ export default class Upload extends Component {
   }
 
   handleChange({ target: { name, value } }) {
-    this.setState({ [name]: [value] })
+    this.setState({ [name]: value })
+  }
+  async handleUrlTest() {
+    const {url} = this.state
+    console.log(url)
+    if(!url) return;
+    try {
+      const response = await fetch('/api/urltester', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({url})
+      })
+      const data = await response.json()
+      console.log(data)
+    } catch(err) {
+      console.error(err)
+    }
   }
 
   render() {
@@ -64,8 +86,10 @@ export default class Upload extends Component {
                     <select
                     disabled={!genres.length}
                     className="m-2"
+                    name="selectedGenre"
+                    onChange={this.handleChange}
                     >
-                      <option>Select a genre</option>
+                      <option value={null}>Select a genre</option>
                       {
                         genres.map(genre => (
                           <option
@@ -78,6 +102,23 @@ export default class Upload extends Component {
                     </select>
                   </form>
                 </div>
+              </Col>
+            </Row>
+            <Row className=" d-flex justify-content-center align-items-center">
+              <Col xs='6'>
+                <SmallButton
+                  icon={null}
+                  heading='Upload'
+                  color='blue'
+                />
+              </Col>
+              <Col xs='6'>
+                <SmallButton
+                  icon={null}
+                  heading='Add URL'
+                  color='purple'
+                  onClick={this.handleUrlTest}
+                />
               </Col>
             </Row>
           </Col>
