@@ -35,11 +35,13 @@ export default function MedButton(props) {
         {`
         .med-swirl-button {
           background-image: url('${swirlBackground}');
-          position: relative
+          position: relative;
+          height: 128px;
+          width: 128px;
         }
         .swirl-subheading {
           position: absolute;
-          font-size: 1rem !important;
+          font-size: .8rem !important;
           bottom: 8px;
         }
         `}

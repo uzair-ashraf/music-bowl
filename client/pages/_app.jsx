@@ -42,7 +42,15 @@ class MyApp extends App {
             box-shadow: 7px 13px 20px rgba(0, 0, 0, 0.25);
             }
             svg.MuiSvgIcon-root {
-            font-size: 6.5rem !important;
+            font-size: 4.5rem !important;
+            }
+            .inner-page {
+              background-image: url('/images/purp-swirl.png')
+            }
+            .inner-page-card {
+              background-color: white;
+              border-radius: 19px;
+              height: 80vh;
             }
             `}
         </style>

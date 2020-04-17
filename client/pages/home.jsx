@@ -23,7 +23,7 @@ export default class Home extends Component {
             />
           </Col>
         </Row>
-        <Row>
+        <Row style={{ marginTop: '2rem' }}>
           <Col xs='6'>
             <MedButton
               link='/upload'
