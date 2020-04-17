@@ -24,18 +24,23 @@ export default function MedButton(props) {
           {
             iconTable[icon]
           }
+          <div className="swirl-subheading">
+            {
+              subheading
+            }
+          </div>
         </div>
       </Link>
       <style jsx>
         {`
-        svg.MuiSvgIcon-root {
-          font-size: 7rem !important;
-        }
         .med-swirl-button {
           background-image: url('${swirlBackground}');
+          position: relative
         }
-        .med-swirl-button:after {
-          content: ${subheading}
+        .swirl-subheading {
+          position: absolute;
+          font-size: 1rem !important;
+          bottom: 8px;
         }
         `}
       </style>

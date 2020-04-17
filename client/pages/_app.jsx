@@ -41,6 +41,9 @@ class MyApp extends App {
             font-size: 2.8rem;
             box-shadow: 7px 13px 20px rgba(0, 0, 0, 0.25);
             }
+            svg.MuiSvgIcon-root {
+            font-size: 6.5rem !important;
+            }
             `}
         </style>
       </div>
