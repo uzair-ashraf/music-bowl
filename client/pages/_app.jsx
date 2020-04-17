@@ -10,12 +10,6 @@ class MyApp extends App {
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
-    if(typeof Window === 'undefined') {
-      console.log(ctx.req)
-      // if(ctx.req.session.userId) {
-      //   ctx.res.redirect('/home')
-      // }
-    }
     return { pageProps };
   }
 

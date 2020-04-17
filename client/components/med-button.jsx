@@ -1,4 +1,3 @@
-// import { useRouter } from 'next/router'
 import Link from 'next/link'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import SearchIcon from '@material-ui/icons/Search'
@@ -18,7 +17,6 @@ export default function MedButton(props) {
     account: <AccountCircleIcon/>,
     settings: <SettingsIcon/>
   }
-
   return (
     <>
       <Link href={link}>
@@ -30,6 +28,9 @@ export default function MedButton(props) {
       </Link>
       <style jsx>
         {`
+        svg.MuiSvgIcon-root {
+          font-size: 7rem !important;
+        }
         .med-swirl-button {
           background-image: url('${swirlBackground}');
         }

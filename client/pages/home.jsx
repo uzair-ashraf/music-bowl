@@ -2,8 +2,14 @@ import React, { Component } from 'react'
 import BigButton from '../components/big-button'
 import MedButton from '../components/med-button'
 import { Container, Row, Col } from 'reactstrap'
+import requireAuth from '../../services/require-auth'
 
 export default class Home extends Component {
+  static async getInitialProps(ctx) {
+    requireAuth(ctx, typeof Window === 'undefined')
+    return {}
+  }
+
   render() {
     return (
       <Container>

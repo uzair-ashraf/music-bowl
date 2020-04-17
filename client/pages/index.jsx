@@ -3,6 +3,17 @@ import BigButton from '../components/big-button'
 import { Container, Row, Col } from 'reactstrap'
 
 export default class Index extends Component {
+  static async getInitialProps(ctx) {
+    if (typeof Window === 'undefined') {
+      if (ctx.req.session.userId) {
+        console.log('redirecting..')
+        ctx.res.redirect('/home')
+        ctx.res.end()
+        return {}
+      }
+    }
+    return {}
+  }
 
   render() {
     const signUpButtonStyle = {
