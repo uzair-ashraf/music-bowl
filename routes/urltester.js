@@ -1,9 +1,8 @@
 const route = require('express-promise-router')()
-const fetch = require('node-fetch')
 const ClientError = require('../services/errorhandling')
 
 route
-  .post('/', async (req, res, next) => {
+  .post('/', (req, res, next) => {
     const { url } = req.body
     const tests = {
       youtube: /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/,

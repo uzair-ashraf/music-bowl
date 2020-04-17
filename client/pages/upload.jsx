@@ -11,7 +11,8 @@ export default class Upload extends Component {
     this.state = {
       url: '',
       genres: [],
-      selectedGenre: null
+      selectedGenre: null,
+      validatedUrl: null
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleUrlTest = this.handleUrlTest.bind(this)
@@ -37,7 +38,6 @@ export default class Upload extends Component {
   }
   async handleUrlTest() {
     const {url} = this.state
-    console.log(url)
     if(!url) return;
     try {
       const response = await fetch('/api/urltester', {
@@ -48,15 +48,15 @@ export default class Upload extends Component {
         },
         body: JSON.stringify({url})
       })
-      const data = await response.json()
-      console.log(data)
+      const validatedUrl = await response.json()
+      this.setState({validatedUrl})
     } catch(err) {
       console.error(err)
     }
   }
 
   render() {
-    const {url, genres} = this.state
+    const {url, genres, validatedUrl} = this.state
     return (
       <Container className="inner-page vh-100">
         <Row className="justify-content-center align-items-center vh-100">
@@ -75,50 +75,62 @@ export default class Upload extends Component {
             <Row>
               <Col xs='12'>
                 <div className="form-container">
-                  <form id="uploadForm" className="mx-auto text-center mt-3">
-                    <input
-                      name="url"
-                      onChange={this.handleChange}
-                      placeholder='Enter URL Here'
-                      value={url}
-                      className="m-2"
-                    />
-                    <select
-                    disabled={!genres.length}
-                    className="m-2"
-                    name="selectedGenre"
-                    onChange={this.handleChange}
-                    >
-                      <option value={null}>Select a genre</option>
-                      {
-                        genres.map(genre => (
-                          <option
-                            key={genre.genre_id}
-                            value={genre.genre_id}>
-                            {genre.genre}
-                          </option>
-                        ))
-                      }
-                    </select>
+                  <form id="uploadForm" className="mx-auto text-center mt-5">
+                    {
+                      validatedUrl
+                      ? (
+                          <select
+                            disabled={!genres.length}
+                            className="m-2"
+                            name="selectedGenre"
+                            onChange={this.handleChange}
+                          >
+                            <option value={null}>Select a genre</option>
+                            {
+                              genres.map(genre => (
+                                <option
+                                  key={genre.genre_id}
+                                  value={genre.genre_id}>
+                                  {genre.genre}
+                                </option>
+                              ))
+                            }
+                          </select>
+                      )
+                      : (
+                          <input
+                            name="url"
+                            onChange={this.handleChange}
+                            placeholder='Enter URL Here'
+                            value={url}
+                            className="m-2"
+                          />
+                        )
+                    }
                   </form>
                 </div>
               </Col>
             </Row>
             <Row className=" d-flex justify-content-center align-items-center">
-              <Col xs='6'>
-                <SmallButton
-                  icon={null}
-                  heading='Upload'
-                  color='blue'
-                />
-              </Col>
-              <Col xs='6'>
-                <SmallButton
-                  icon={null}
-                  heading='Add URL'
-                  color='purple'
-                  onClick={this.handleUrlTest}
-                />
+              <Col xs='12'>
+                {
+                  validatedUrl
+                  ? (
+                    <SmallButton
+                    icon={null}
+                    heading='Upload'
+                    color='blue'
+                    />
+                  )
+                  : (
+                    <SmallButton
+                    icon={null}
+                    heading='Add URL'
+                    color='purple'
+                    onClick={this.handleUrlTest}
+                    />
+                  )
+                }
               </Col>
             </Row>
           </Col>
@@ -137,6 +149,9 @@ export default class Upload extends Component {
               border-radius: 7px;
               font-size: 1.2rem;
               border-style: none;
+            }
+            select {
+              padding: 6px;
             }
             `}
         </style>
