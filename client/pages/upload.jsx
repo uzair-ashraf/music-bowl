@@ -48,7 +48,9 @@ export default class Upload extends Component {
         },
         body: JSON.stringify({url})
       })
-      const validatedUrl = await response.json()
+      const validatedUrl = response.status === 200
+      ? await response.json()
+      : Promise.reject('Invalid URL')
       this.setState({validatedUrl})
     } catch(err) {
       console.error(err)
