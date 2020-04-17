@@ -15,8 +15,18 @@ export default class Upload extends Component {
   }
 
   static async getInitialProps(ctx) {
-    requireAuth(ctx, typeof Window === 'undefined')
-    return {}
+      requireAuth(ctx, typeof Window === 'undefined')
+      return {}
+  }
+
+  async componentDidMount() {
+    try {
+      const response = await fetch('/api/genres')
+      const genres = await response.json()
+      this.setState({genres})
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   handleChange({ target: { name, value } }) {
@@ -56,7 +66,15 @@ export default class Upload extends Component {
                     className="m-2"
                     >
                       <option>Select a genre</option>
-
+                      {
+                        genres.map(genre => (
+                          <option
+                            key={genre.genre_id}
+                            value={genre.genre_id}>
+                            {genre.genre}
+                          </option>
+                        ))
+                      }
                     </select>
                   </form>
                 </div>
