@@ -4,6 +4,7 @@ import requireAuth from '../../services/require-auth'
 import BigButton from '../components/big-button'
 import SmallButton from '../components/small-button'
 import Heading from '../components/heading'
+import YouTube from 'react-youtube';
 
 export default class Upload extends Component {
   constructor(props) {
@@ -11,12 +12,13 @@ export default class Upload extends Component {
     this.state = {
       url: '',
       genres: [],
-      selectedGenre: null,
+      selectedGenre: '',
       validatedUrl: null,
       errorMessage: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleUrlTest = this.handleUrlTest.bind(this)
+    this.extractYoutubeData = this.extractYoutubeData.bind(this)
   }
 
   static async getInitialProps(ctx) {
@@ -57,9 +59,23 @@ export default class Upload extends Component {
       this.setState({ errorMessage: err.message, url: '' })
     }
   }
+  async songUpload() {
+    const body = {
+
+    }
+  }
+  extractYoutubeData(e) {
+    console.log(e.target.getVideoData())
+  }
 
   render() {
-    const {url, genres, validatedUrl, errorMessage} = this.state
+    const {
+      url,
+      genres,
+      validatedUrl,
+      errorMessage,
+      selectedGenre
+    } = this.state
     return (
       <Container className="inner-page vh-100">
         <Row className="justify-content-center align-items-center vh-100">
@@ -67,12 +83,40 @@ export default class Upload extends Component {
             <Row>
               <Col xs='12'>
                 <Heading/>
-                <BigButton
-                  content='/images/logo.png'
-                  color='blue'
-                  link='/home'
-                  image={true}
-                />
+                {
+                  !validatedUrl
+                  ? (
+                    <BigButton
+                      content='/images/logo.png'
+                      color='blue'
+                      link='/home'
+                      image={true}
+                    />
+                  )
+                  : (
+                    validatedUrl.provider === 'youtube'
+                    ? (
+                      <div className="youtube-container mt-5">
+                        <YouTube
+                          videoId={validatedUrl.videoId}
+                          opts={{
+                            height: '160',
+                            width: '100%'
+                          }}
+                          onReady={this.extractYoutubeData}
+                        />
+                      </div>
+                    )
+                    : (
+                      <BigButton
+                        content='/images/logo.png'
+                        color='blue'
+                        link='/home'
+                        image={true}
+                      />
+                    )
+                  )
+                }
               </Col>
             </Row>
             <Row>
@@ -91,8 +135,9 @@ export default class Upload extends Component {
                             className="m-2"
                             name="selectedGenre"
                             onChange={this.handleChange}
+                            value={selectedGenre}
                           >
-                            <option value={null}>Select a genre</option>
+                            <option value=''>Select a genre</option>
                             {
                               genres.map(genre => (
                                 <option
@@ -124,7 +169,7 @@ export default class Upload extends Component {
                     icon={null}
                     heading='Upload'
                     color='blue'
-                    disabled={!validatedUrl}
+                    disabled={!validatedUrl || !selectedGenre}
                     />
               </Col>
               <Col xs='6'>

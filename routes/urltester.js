@@ -10,8 +10,10 @@ route
     }
     let response = null
     if (tests.youtube.test(url)) {
+      const videoId = new URL(url).searchParams.get('v')
       response = {
-        provider: 'youtube'
+        provider: 'youtube',
+        videoId
       }
     } else if (tests.spotify.test(url)) {
       response = {

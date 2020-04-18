@@ -11,7 +11,7 @@ export default function SmallButton(props) {
         className={`
         swirl-button small-swirl-button ${disabled ? 'disabled' : ''}
         `}
-        onClick={onClick}
+        onClick={disabled ? null : onClick}
       >
         {
           heading
