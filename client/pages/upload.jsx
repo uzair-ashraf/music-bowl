@@ -12,7 +12,8 @@ export default class Upload extends Component {
       url: '',
       genres: [],
       selectedGenre: null,
-      validatedUrl: null
+      validatedUrl: null,
+      errorMessage: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleUrlTest = this.handleUrlTest.bind(this)
@@ -29,12 +30,12 @@ export default class Upload extends Component {
       const genres = await response.json()
       this.setState({genres})
     } catch (err) {
-      console.error(err)
+      console.error(err.message)
     }
   }
 
   handleChange({ target: { name, value } }) {
-    this.setState({ [name]: value })
+    this.setState({ [name]: value , errorMessage: ''})
   }
   async handleUrlTest() {
     const {url} = this.state
@@ -50,15 +51,15 @@ export default class Upload extends Component {
       })
       const validatedUrl = response.status === 200
       ? await response.json()
-      : Promise.reject('Invalid URL')
+      : await Promise.reject(new Error('Invalid URL'))
       this.setState({validatedUrl})
     } catch(err) {
-      console.error(err)
+      this.setState({ errorMessage: err.message, url: '' })
     }
   }
 
   render() {
-    const {url, genres, validatedUrl} = this.state
+    const {url, genres, validatedUrl, errorMessage} = this.state
     return (
       <Container className="inner-page vh-100">
         <Row className="justify-content-center align-items-center vh-100">
@@ -77,7 +78,11 @@ export default class Upload extends Component {
             <Row>
               <Col xs='12'>
                 <div className="form-container">
-                  <form id="uploadForm" className="mx-auto text-center mt-5">
+                  <form
+                  id="uploadForm"
+                  className="mx-auto text-center mt-5"
+                  onSubmit={e => e.preventDefault()}
+                  >
                     {
                       validatedUrl
                       ? (
@@ -103,7 +108,7 @@ export default class Upload extends Component {
                           <input
                             name="url"
                             onChange={this.handleChange}
-                            placeholder='Enter URL Here'
+                            placeholder={!errorMessage.length ? 'Enter URL Here' : errorMessage}
                             value={url}
                             className="m-2"
                           />
@@ -114,25 +119,22 @@ export default class Upload extends Component {
               </Col>
             </Row>
             <Row className=" d-flex justify-content-center align-items-center">
-              <Col xs='12'>
-                {
-                  validatedUrl
-                  ? (
+              <Col xs='6'>
                     <SmallButton
                     icon={null}
                     heading='Upload'
                     color='blue'
+                    disabled={!validatedUrl}
                     />
-                  )
-                  : (
+              </Col>
+              <Col xs='6'>
                     <SmallButton
                     icon={null}
                     heading='Add URL'
                     color='purple'
                     onClick={this.handleUrlTest}
+                    disabled={false}
                     />
-                  )
-                }
               </Col>
             </Row>
           </Col>
@@ -151,6 +153,9 @@ export default class Upload extends Component {
               border-radius: 7px;
               font-size: 1.2rem;
               border-style: none;
+            }
+            input {
+              border: ${!!errorMessage.length ? '2px solid red' : 'none'};
             }
             select {
               padding: 6px;

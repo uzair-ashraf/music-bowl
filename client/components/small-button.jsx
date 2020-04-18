@@ -1,5 +1,5 @@
 export default function SmallButton(props) {
-  const { icon, heading, color, onClick } = props
+  const { icon, heading, color, onClick, disabled } = props
 
   const swirlBackground = color === 'blue'
     ? '/images/blue-swirl.png'
@@ -8,7 +8,9 @@ export default function SmallButton(props) {
   return (
     <>
       <div
-        className="swirl-button small-swirl-button"
+        className={`
+        swirl-button small-swirl-button ${disabled ? 'disabled' : ''}
+        `}
         onClick={onClick}
       >
         {
@@ -19,9 +21,15 @@ export default function SmallButton(props) {
         {`
         .small-swirl-button {
           background-image: url('${swirlBackground}');
-          height: 85px;
-          width: 85px;
-          font-size: 1rem;
+          height: 100px;
+          width: 100px;
+          font-size: 1.1rem;
+        }
+        .disabled {
+          background-image: url('/images/gray-swirl.png')
+        }
+        .disabled:hover {
+          cursor: not-allowed;
         }
         `}
       </style>
