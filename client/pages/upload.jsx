@@ -14,7 +14,8 @@ export default class Upload extends Component {
       genres: [],
       selectedGenre: '',
       validatedUrl: null,
-      errorMessage: ''
+      errorMessage: '',
+      title: null
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleUrlTest = this.handleUrlTest.bind(this)
@@ -60,22 +61,47 @@ export default class Upload extends Component {
     }
   }
   async songUpload() {
+    if(!this.state.title) return
+    const {
+      title,
+      validatedUrl,
+      selectedGenre
+    } = this.state
     const body = {
-
+      title,
+      url: validatedUrl.url,
+      video_id: validatedUrl.videoId,
+      provider: validatedUrl.provider,
+      genre_id: selectedGenre
+    }
+    try {
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body
+      })
+    const data = await response.json()
+    console.log(data);
+    } catch(err) {
+      console.error(err)
     }
   }
   extractYoutubeData(e) {
-    console.log(e.target.getVideoData())
+    const {title} = e.target.getVideoData()
+    this.setState({title, ...this.state})
   }
 
   render() {
     const {
-      url,
-      genres,
-      validatedUrl,
-      errorMessage,
-      selectedGenre
-    } = this.state
+            url,
+            genres,
+            validatedUrl,
+            errorMessage,
+            selectedGenre
+          } = this.state
     return (
       <Container className="inner-page vh-100">
         <Row className="justify-content-center align-items-center vh-100">

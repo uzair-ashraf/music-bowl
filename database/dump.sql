@@ -144,11 +144,11 @@ ALTER SEQUENCE public.providers_provider_id_seq OWNED BY public.providers.provid
 CREATE TABLE public.songs (
     title character varying(255) NOT NULL,
     url text NOT NULL,
-    thumbnail text,
     provider_id smallint NOT NULL,
     genre_id integer NOT NULL,
     user_id integer NOT NULL,
-    song_id integer NOT NULL
+    song_id integer NOT NULL,
+    video_id character varying(12) NOT NULL
 );
 
 
@@ -261,6 +261,22 @@ COPY public.favorites (song_id, user_id, favorite_id) FROM stdin;
 --
 
 COPY public.genre (genre, genre_id) FROM stdin;
+Alternative	1
+Anime	2
+Blues	3
+Classical	4
+Country	5
+EDM	6
+Hip Hop	7
+J-Pop	8
+Jazz	9
+K-Pop	10
+Latin	11
+Pop	12
+R&B	13
+Reggae	14
+Rock	15
+Vocaloid	16
 \.
 
 
@@ -269,6 +285,8 @@ COPY public.genre (genre, genre_id) FROM stdin;
 --
 
 COPY public.providers (provider_name, provider_id) FROM stdin;
+youtube	1
+spotify	2
 \.
 
 
@@ -276,7 +294,7 @@ COPY public.providers (provider_name, provider_id) FROM stdin;
 -- Data for Name: songs; Type: TABLE DATA; Schema: public; Owner: dev
 --
 
-COPY public.songs (title, url, thumbnail, provider_id, genre_id, user_id, song_id) FROM stdin;
+COPY public.songs (title, url, provider_id, genre_id, user_id, song_id, video_id) FROM stdin;
 \.
 
 
@@ -300,14 +318,14 @@ SELECT pg_catalog.setval('public.favorites_favorite_id_seq', 1, false);
 -- Name: genre_genre_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dev
 --
 
-SELECT pg_catalog.setval('public.genre_genre_id_seq', 1, false);
+SELECT pg_catalog.setval('public.genre_genre_id_seq', 16, true);
 
 
 --
 -- Name: providers_provider_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dev
 --
 
-SELECT pg_catalog.setval('public.providers_provider_id_seq', 1, false);
+SELECT pg_catalog.setval('public.providers_provider_id_seq', 2, true);
 
 
 --
