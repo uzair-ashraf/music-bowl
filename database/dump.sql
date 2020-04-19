@@ -295,6 +295,19 @@ spotify	2
 --
 
 COPY public.songs (title, url, provider_id, genre_id, user_id, song_id, video_id) FROM stdin;
+korou x powfu - a friend in you	https://www.youtube.com/watch?v=zlEfEKUUCIg	1	7	1	1	zlEfEKUUCIg
+Scars on My Heart (feat. SadBoyProlific)	https://www.youtube.com/watch?v=73_KEAYcgIk	1	7	1	2	73_KEAYcgIk
+VOCALOID2: Hatsune Miku - "Unfragment" [HD]	https://www.youtube.com/watch?v=y_g4zbwWG_I	1	2	1	3	y_g4zbwWG_I
+【初音ミク - Hatsune Miku】Cold Leaf【Aerial Flow Original】【Romaji Subtitles】	https://www.youtube.com/watch?v=04udMvE7c_A	1	2	1	7	04udMvE7c_A
+Did my husband get my family member pregnant? | The Maury Show	https://www.youtube.com/watch?v=pXMrh3uJ7s4	1	2	1	8	pXMrh3uJ7s4
+bae robins - your i love you... (ft. powfu)	https://www.youtube.com/watch?v=Td0JOW3VY_I&list=RDTd0JOW3VY_I&start_radio=1	1	2	1	9	Td0JOW3VY_I
+Sorry I Never Apologized (feat. Two:22)	https://www.youtube.com/watch?v=MlUKSmyJQ2Y	1	7	1	11	MlUKSmyJQ2Y
+Juice WRLD -  Lean Wit Me (Official Music Video)	https://www.youtube.com/watch?v=5SejM_hBvMM&list=RDGMEMHDXYb1_DDSgDsobPsOFxpAVM5SejM_hBvMM&start_radio=1	1	7	1	17	5SejM_hBvMM
+Shortie Like Mine	https://www.youtube.com/watch?v=BFxCBGOdDbU&list=RDGMEMHDXYb1_DDSgDsobPsOFxpAVM5SejM_hBvMM&index=2	1	7	1	18	BFxCBGOdDbU
+Juice WRLD - All Girls Are The Same (Dir. by @_ColeBennett_)	https://www.youtube.com/watch?v=h3EJICKwITw&list=RDGMEMHDXYb1_DDSgDsobPsOFxpAVM5SejM_hBvMM&index=7	1	7	1	20	h3EJICKwITw
+Juice WRLD - Empty (Official Audio)	https://www.youtube.com/watch?v=9LSyWM2CL-U&list=RDGMEMHDXYb1_DDSgDsobPsOFxpAVM5SejM_hBvMM&index=8	1	7	1	23	9LSyWM2CL-U
+Post Malone - Circles	https://www.youtube.com/watch?v=wXhTHyIgQ_U&list=RDGMEMHDXYb1_DDSgDsobPsOFxpAVM5SejM_hBvMM&index=9	1	7	1	25	wXhTHyIgQ_U
+Feel That Again (feat. Happily Sad)	https://www.youtube.com/watch?v=iC0j5-xg98M&list=RDTd0JOW3VY_I&index=3	1	7	1	50	iC0j5-xg98M
 \.
 
 
@@ -332,7 +345,7 @@ SELECT pg_catalog.setval('public.providers_provider_id_seq', 2, true);
 -- Name: songs_song_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dev
 --
 
-SELECT pg_catalog.setval('public.songs_song_id_seq', 1, false);
+SELECT pg_catalog.setval('public.songs_song_id_seq', 50, true);
 
 
 --
@@ -372,6 +385,14 @@ ALTER TABLE ONLY public.providers
 
 ALTER TABLE ONLY public.songs
     ADD CONSTRAINT songs_pkey PRIMARY KEY (song_id);
+
+
+--
+-- Name: songs songs_user_id_video_id_key; Type: CONSTRAINT; Schema: public; Owner: dev
+--
+
+ALTER TABLE ONLY public.songs
+    ADD CONSTRAINT songs_user_id_video_id_key UNIQUE (user_id, video_id);
 
 
 --

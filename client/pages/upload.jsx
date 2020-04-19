@@ -66,6 +66,7 @@ export default class Upload extends Component {
     try {
       const response = await fetch('/api/urltester', {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -102,6 +103,7 @@ export default class Upload extends Component {
     try {
       const response = await fetch('/api/upload', {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
