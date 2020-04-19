@@ -20,6 +20,7 @@ export default class Upload extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleUrlTest = this.handleUrlTest.bind(this)
     this.extractYoutubeData = this.extractYoutubeData.bind(this)
+    this.songUpload = this.songUpload.bind(this)
   }
 
   static async getInitialProps(ctx) {
@@ -61,6 +62,7 @@ export default class Upload extends Component {
     }
   }
   async songUpload() {
+    console.log('clickity clack')
     if(!this.state.title) return
     const {
       title,
@@ -71,8 +73,8 @@ export default class Upload extends Component {
       title,
       url: validatedUrl.url,
       video_id: validatedUrl.videoId,
-      provider: validatedUrl.provider,
-      genre_id: selectedGenre
+      provider_id: validatedUrl.provider,
+      genre_id: Number(selectedGenre)
     }
     try {
       const response = await fetch('/api/upload', {
@@ -81,7 +83,7 @@ export default class Upload extends Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body
+        body: JSON.stringify(body)
       })
     const data = await response.json()
     console.log(data);
@@ -91,7 +93,7 @@ export default class Upload extends Component {
   }
   extractYoutubeData(e) {
     const {title} = e.target.getVideoData()
-    this.setState({title, ...this.state})
+    this.setState({title})
   }
 
   render() {
@@ -195,6 +197,7 @@ export default class Upload extends Component {
                     icon={null}
                     heading='Upload'
                     color='blue'
+                    onClick={this.songUpload}
                     disabled={!validatedUrl || !selectedGenre}
                     />
               </Col>
