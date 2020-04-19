@@ -5,6 +5,7 @@ import BigButton from '../components/big-button'
 import SmallButton from '../components/small-button'
 import Heading from '../components/heading'
 import YouTube from 'react-youtube';
+import {FrontEndError} from '../../services/errorhandling'
 
 export default class Upload extends Component {
   constructor(props) {
@@ -15,12 +16,18 @@ export default class Upload extends Component {
       selectedGenre: '',
       validatedUrl: null,
       errorMessage: '',
-      title: null
+      title: null,
+      isLoading: false,
+      uploadResponse: {
+        success: false,
+        message: ''
+      }
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleUrlTest = this.handleUrlTest.bind(this)
     this.extractYoutubeData = this.extractYoutubeData.bind(this)
     this.songUpload = this.songUpload.bind(this)
+    this.resetUrl = this.resetUrl.bind(this)
   }
 
   static async getInitialProps(ctx) {
@@ -41,6 +48,18 @@ export default class Upload extends Component {
   handleChange({ target: { name, value } }) {
     this.setState({ [name]: value , errorMessage: ''})
   }
+  resetUrl() {
+    this.setState({
+      validatedUrl: null,
+      title: null,
+      selectedGenre: '',
+      url: '',
+      uploadResponse: {
+        success: false,
+        message: ''
+      }
+    })
+  }
   async handleUrlTest() {
     const {url} = this.state
     if(!url) return;
@@ -55,15 +74,19 @@ export default class Upload extends Component {
       })
       const validatedUrl = response.status === 200
       ? await response.json()
-      : await Promise.reject(new Error('Invalid URL'))
+      : await Promise.reject(new FrontEndError('Invalid URL'))
       this.setState({validatedUrl})
     } catch(err) {
-      this.setState({ errorMessage: err.message, url: '' })
+      if(err instanceof FrontEndError) {
+        this.setState({ errorMessage: err.message, url: '' })
+      } else {
+        console.error(err)
+      }
     }
   }
   async songUpload() {
-    console.log('clickity clack')
     if(!this.state.title) return
+    this.setState({isLoading: true})
     const {
       title,
       validatedUrl,
@@ -85,10 +108,34 @@ export default class Upload extends Component {
         },
         body: JSON.stringify(body)
       })
-    const data = await response.json()
-    console.log(data);
+    const uploaded = await response.json()
+     if(!uploaded.success) await Promise.reject(new FrontEndError(uploaded.message))
+     this.setState({
+       isLoading: false,
+       uploadResponse: {
+       success: true,
+       message: "Your song has been uploaded!"
+     }})
     } catch(err) {
-      console.error(err)
+      if(err instanceof FrontEndError) {
+        console.log(err.message)
+        this.setState({
+          isLoading: false,
+          uploadResponse: {
+            success: false,
+            message: err.message
+          }
+        })
+      } else {
+        console.error(err)
+        this.setState({
+          isLoading: false,
+          uploadResponse: {
+            success: false,
+            message: 'Unexpected error has occurred.'
+          }
+        })
+      }
     }
   }
   extractYoutubeData(e) {
@@ -102,7 +149,9 @@ export default class Upload extends Component {
             genres,
             validatedUrl,
             errorMessage,
-            selectedGenre
+            selectedGenre,
+            isLoading,
+            uploadResponse
           } = this.state
     return (
       <Container className="inner-page vh-100">
@@ -149,10 +198,15 @@ export default class Upload extends Component {
             </Row>
             <Row>
               <Col xs='12'>
+                <div
+                className="text-center"
+                style={{color: uploadResponse.success ? 'green' : 'red'}}>
+                  {uploadResponse.message}
+                </div>
                 <div className="form-container">
                   <form
                   id="uploadForm"
-                  className="mx-auto text-center mt-5"
+                  className={`mx-auto text-center mt-${!!uploadResponse.message ? '1' : '5'}`}
                   onSubmit={e => e.preventDefault()}
                   >
                     {
@@ -198,16 +252,16 @@ export default class Upload extends Component {
                     heading='Upload'
                     color='blue'
                     onClick={this.songUpload}
-                    disabled={!validatedUrl || !selectedGenre}
+                    disabled={!validatedUrl || !selectedGenre || isLoading}
                     />
               </Col>
               <Col xs='6'>
                     <SmallButton
                     icon={null}
-                    heading='Add URL'
+                    heading={validatedUrl ? 'New URL' : 'Add URL'}
                     color='purple'
-                    onClick={this.handleUrlTest}
-                    disabled={false}
+                    onClick={validatedUrl ? this.resetUrl : this.handleUrlTest}
+                    disabled={isLoading}
                     />
               </Col>
             </Row>

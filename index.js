@@ -4,7 +4,7 @@ const express = require('express')
 const next = require('next')
 const path = require('path')
 const session = require('express-session')
-const ClientError = require('./services/errorhandling')
+const { ClientError, ServerError, AuthError } = require('./services/errorhandling')
 const FileStore = require('session-file-store')(session)
 
 const fileStoreOptions = {
@@ -32,11 +32,6 @@ app.prepare().then(() => {
 
   server.use(express.json())
 
-  // server.use((req, res, next) => {
-  //   console.log(req.path)
-  //   next()
-  // })
-
   server.use('/api', require('./routes/routes'))
 
   server.all('*', (req, res) => {
@@ -44,10 +39,12 @@ app.prepare().then(() => {
   })
 
   server.use((err, req, res, next) => {
-    if (err instanceof ClientError) {
+    if (err instanceof ClientError || err instanceof ServerError) {
       res.status(err.status).json({
         message: err.message
       })
+    } else if (err instanceof AuthError) {
+      res.redirect('/login')
     } else {
       next()
     }

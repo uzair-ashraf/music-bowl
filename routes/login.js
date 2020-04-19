@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt')
 const route = require('express-promise-router')()
 const sql = require('../services/db')
-const ClientError = require('../services/errorhandling')
+const { ClientError } = require('../services/errorhandling')
 
 route
   .post('/', async (req, res, next) => {
