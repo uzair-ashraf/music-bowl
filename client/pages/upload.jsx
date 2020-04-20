@@ -5,6 +5,7 @@ import BigButton from '../components/big-button'
 import SmallButton from '../components/small-button'
 import Heading from '../components/heading'
 import YouTube from 'react-youtube';
+import SpotifyPlayer from '../components/spotify-player'
 import {FrontEndError} from '../../services/errorhandling'
 
 export default class Upload extends Component {
@@ -73,10 +74,15 @@ export default class Upload extends Component {
         },
         body: JSON.stringify({url})
       })
-      const validatedUrl = response.status === 200
-      ? await response.json()
-      : await Promise.reject(new FrontEndError('Invalid URL'))
-      this.setState({validatedUrl})
+      const validatedUrl = await response.json()
+      if (response.status === 406) {
+        await Promise.reject(new FrontEndError(validatedUrl.message))
+      }
+      this.setState({validatedUrl}, () => {
+        if(validatedUrl.provider === 'spotify') {
+          this.extractSpotifyData(validatedUrl.songData)
+        }
+      })
     } catch(err) {
       if(err instanceof FrontEndError) {
         this.setState({ errorMessage: err.message, url: '' })
@@ -103,7 +109,6 @@ export default class Upload extends Component {
     try {
       const response = await fetch('/api/upload', {
         method: 'POST',
-        credentials: 'include',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -120,7 +125,6 @@ export default class Upload extends Component {
      }})
     } catch(err) {
       if(err instanceof FrontEndError) {
-        console.log(err.message)
         this.setState({
           isLoading: false,
           uploadResponse: {
@@ -142,6 +146,10 @@ export default class Upload extends Component {
   }
   extractYoutubeData(e) {
     const {title} = e.target.getVideoData()
+    this.setState({title})
+  }
+  extractSpotifyData(data) {
+    const {name: title} = data
     this.setState({title})
   }
 
@@ -175,7 +183,7 @@ export default class Upload extends Component {
                   : (
                     validatedUrl.provider === 'youtube'
                     ? (
-                      <div className="youtube-container mt-5">
+                      <div className="player-container mt-5">
                         <YouTube
                           videoId={validatedUrl.videoId}
                           opts={{
@@ -187,15 +195,18 @@ export default class Upload extends Component {
                       </div>
                     )
                     : (
-                      <BigButton
-                        content='/images/logo.png'
-                        color='blue'
-                        link='/home'
-                        image={true}
-                      />
+                      <div className="player-container mt-5">
+                        <SpotifyPlayer
+                          uri={validatedUrl.videoId}
+                          view='list'
+                          theme='black'
+                          width='100%'
+                          height='160'
+                        />
+                      </div>
+                      )
                     )
-                  )
-                }
+                  }
               </Col>
             </Row>
             <Row>

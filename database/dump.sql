@@ -148,7 +148,7 @@ CREATE TABLE public.songs (
     genre_id integer NOT NULL,
     user_id integer NOT NULL,
     song_id integer NOT NULL,
-    video_id character varying(12) NOT NULL
+    video_id character varying(255) NOT NULL
 );
 
 
@@ -308,6 +308,10 @@ Juice WRLD - All Girls Are The Same (Dir. by @_ColeBennett_)	https://www.youtube
 Juice WRLD - Empty (Official Audio)	https://www.youtube.com/watch?v=9LSyWM2CL-U&list=RDGMEMHDXYb1_DDSgDsobPsOFxpAVM5SejM_hBvMM&index=8	1	7	1	23	9LSyWM2CL-U
 Post Malone - Circles	https://www.youtube.com/watch?v=wXhTHyIgQ_U&list=RDGMEMHDXYb1_DDSgDsobPsOFxpAVM5SejM_hBvMM&index=9	1	7	1	25	wXhTHyIgQ_U
 Feel That Again (feat. Happily Sad)	https://www.youtube.com/watch?v=iC0j5-xg98M&list=RDTd0JOW3VY_I&index=3	1	7	1	50	iC0j5-xg98M
+9TAILS - ur the one i dream bout (lyrics)	https://www.youtube.com/watch?v=r2K3BvZplHg&list=RDTd0JOW3VY_I&index=4	1	7	1	51	r2K3BvZplHg
+Get Allot	https://www.youtube.com/watch?v=CoZ4_gNc1Wc&list=RDwUjfWwqFcFI&index=11	1	7	1	53	CoZ4_gNc1Wc
+Moonlight Sonata 3rd Movement	https://open.spotify.com/track/6JlK4T57sOrLGgur7sfVIu	2	4	1	54	spotify:track:6JlK4T57sOrLGgur7sfVIu
+Haruka Kanata	https://open.spotify.com/track/2L2guKEbiVNAliokGduDcn	2	2	1	57	spotify:track:2L2guKEbiVNAliokGduDcn
 \.
 
 
@@ -345,7 +349,7 @@ SELECT pg_catalog.setval('public.providers_provider_id_seq', 2, true);
 -- Name: songs_song_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dev
 --
 
-SELECT pg_catalog.setval('public.songs_song_id_seq', 50, true);
+SELECT pg_catalog.setval('public.songs_song_id_seq', 58, true);
 
 
 --

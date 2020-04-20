@@ -12,7 +12,6 @@ route
       }
       req.body.provider_id = providerTable[req.body.provider_id]
       req.body.user_id = req.session.userId
-
       const response = await sql`
       INSERT INTO songs ${
         sql(req.body, 'title', 'url', 'provider_id', 'genre_id', 'user_id', 'video_id')

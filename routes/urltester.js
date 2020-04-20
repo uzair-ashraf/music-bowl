@@ -1,8 +1,11 @@
 const route = require('express-promise-router')()
-const ClientError = require('../services/errorhandling')
+const { ClientError } = require('../services/errorhandling')
+const fetch = require('node-fetch')
+
+console.log(process.env.SPOTIFY_API)
 
 route
-  .post('/', (req, res, next) => {
+  .post('/', async (req, res, next) => {
     const { url } = req.body
     const tests = {
       youtube: /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/,
@@ -16,8 +19,39 @@ route
         videoId
       }
     } else if (tests.spotify.test(url)) {
-      response = {
-        provider: 'spotify'
+      const videoPath = new URL(url).pathname
+      let videoId = null
+      const [, pathType, spotifyId] = videoPath.split('/')
+      if(pathType !== 'track') {
+        throw new ClientError('Only single song links are supported', 406)
+      }
+      try {
+        const encodedSpotifySecret = Buffer.from(process.env.SPOTIFY_API_ID + ':' + process.env.SPOTIFY_API_SECRET).toString('base64')
+        const token = await fetch('https://accounts.spotify.com/api/token', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': `Basic ${encodedSpotifySecret}`
+          },
+          body: "grant_type=client_credentials",
+        })
+        const {access_token} = await token.json();
+        const spotifyRes = await fetch(`https://api.spotify.com/v1/tracks/${spotifyId}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${access_token}`
+          }
+        })
+        const songData = await spotifyRes.json()
+        videoId = songData.uri
+        response = {
+          provider: 'spotify',
+          videoId,
+          songData
+        }
+      } catch (err) {
+        console.error(err)
+        next(err)
       }
     } else {
       throw new ClientError('Invalid URL', 406)
