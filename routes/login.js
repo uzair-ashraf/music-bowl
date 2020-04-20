@@ -31,7 +31,7 @@ route
       }
 
       req.session.userId = completeUserData.user_id
-      console.log(req.session)
+      req.session.save(err => console.error(err))
       res.json({
         message: 'User logged in successfully!'
       })
