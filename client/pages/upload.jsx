@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'reactstrap'
 import requireAuth from '../../services/require-auth'
 import BigButton from '../components/big-button'
 import SmallButton from '../components/small-button'
+import Layout from '../components/layout'
 import Heading from '../components/heading'
 import YouTube from 'react-youtube';
 import SpotifyPlayer from '../components/spotify-player'
@@ -164,12 +165,12 @@ export default class Upload extends Component {
             uploadResponse
           } = this.state
     return (
-      <Container className="inner-page vh-100">
-        <Row className="justify-content-center align-items-center vh-100">
-          <Col xs='10' className="inner-page-card">
+      <Layout>
             <Row>
               <Col xs='12'>
-                <Heading/>
+                <Heading
+                heading='Recommend a song'
+                />
                 {
                   !validatedUrl
                   ? (
@@ -278,8 +279,6 @@ export default class Upload extends Component {
                     />
               </Col>
             </Row>
-          </Col>
-        </Row>
         <style jsx>
           {`
             #uploadForm {
@@ -303,7 +302,7 @@ export default class Upload extends Component {
             }
             `}
         </style>
-      </Container>
+      </Layout>
     )
   }
 }

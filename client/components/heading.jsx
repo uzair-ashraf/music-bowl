@@ -3,11 +3,11 @@ import React from 'react'
 export default function Heading(props) {
   return (
     <>
-      <div className="heading">
+      <div className="heading mt-1">
         {
           props.username
             ? `${props.username} recommends`
-            : 'Recommend a song'
+            : props.heading
         }
       </div>
       <style jsx>
