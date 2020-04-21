@@ -5,7 +5,7 @@ export default function Layout(props) {
   return (
     <Container className="inner-page vh-100">
       <Row className="justify-content-center align-items-center vh-100">
-        <Col xs='10' className="inner-page-card">
+        <Col xs='10' className="inner-page-card overflow-auto">
           {props.children}
         </Col>
       </Row>

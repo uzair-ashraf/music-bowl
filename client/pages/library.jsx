@@ -5,14 +5,20 @@ import Heading from '../components/heading'
 import CategoryButton from '../components/category-button'
 import LibrarySong from '../components/library-song'
 import requireAuth from '../../services/require-auth'
+import Loader from '../components/loader'
 
 export default class Library extends Component {
   constructor(props) {
     super(props)
     this.state = {
       uploads: [],
-      favorites: []
+      favorites: [],
+      isLoading: true,
+      selectedSong: null,
+      view: 'Uploads'
     }
+    this.switchView = this.switchView.bind(this)
+    this.selectSong = this.selectSong.bind(this)
   }
 
   static async getInitialProps(ctx) {
@@ -24,13 +30,23 @@ export default class Library extends Component {
     try {
       const response = await fetch('/api/library')
       const libraryData = await response.json()
-      console.log(libraryData)
+      libraryData.isLoading = false
+      this.setState(libraryData)
     } catch (err) {
       console.log(err)
     }
   }
 
+  switchView(view) {
+    this.setState({ view })
+  }
+
+  selectSong(selectedSong) {
+    this.setState({ selectedSong })
+  }
+
   render() {
+    const { isLoading, view, uploads, favorites, selectedSong } = this.state
     return (
       <Layout>
         <Heading
@@ -42,21 +58,44 @@ export default class Library extends Component {
               <CategoryButton
                 color='blue'
                 heading='Uploads'
-                active={true}
+                active={view === 'Uploads'}
+                switchView={this.switchView}
               />
               <CategoryButton
                 color='purple'
                 heading='Favorites'
-                active={false}
+                active={view === 'Favorites'}
+                switchView={this.switchView}
               />
             </div>
           </Col>
         </Row>
         <Row>
           <Col xs='12' className="mt-2">
-            <LibrarySong
-
-            />
+            {
+              isLoading
+                ? (
+                  <div className='d-flex justify-content-center'>
+                    <Loader />
+                  </div>
+                )
+                : (
+                  view === 'Uploads'
+                    ? (
+                      uploads.map(song => (
+                        <LibrarySong
+                          key={song.song_id}
+                          selectSong={this.selectSong}
+                          isOpen={selectedSong === song.song_id}
+                          {...song}
+                        />
+                      ))
+                    )
+                    : (
+                      null
+                    )
+                )
+            }
           </Col>
         </Row>
       </Layout>

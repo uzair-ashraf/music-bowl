@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function CategoryButton(props) {
-  const { heading, color, active } = props
+  const { heading, color, active, switchView } = props
   let swirlBackground = color === 'blue'
     ? '/images/blue-swirl.png'
     : '/images/purp-swirl.png'
@@ -10,7 +10,10 @@ export default function CategoryButton(props) {
     swirlBackground = '/images/gray-swirl.png'
   }
   return (
-    <div className='category-button d-flex justify-content-center align-items-center'>
+    <div
+      className='category-button d-flex justify-content-center align-items-center'
+      onClick={() => switchView(heading)}
+    >
       {heading}
       <style jsx>
         {`
