@@ -14,6 +14,9 @@ export default function LibrarySong(props) {
         isOpen
           ? (
             <div>
+              <div className="library-song-title text-truncate m-1">
+                {title}
+              </div>
               {
                 provider_name === 'youtube'
                   ? (
