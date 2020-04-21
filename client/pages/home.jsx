@@ -42,18 +42,18 @@ export default class Home extends Component {
           </Col>
           <Col xs='6'>
             <MedButton
-              link='/account'
+              link='/library'
               color='purple'
-              subheading='Account'
-              icon='account'
+              subheading='Library'
+              icon='library'
             />
           </Col>
           <Col xs='6'>
             <MedButton
-              link='/settings'
+              link='/account'
               color='purple'
-              subheading='Settings'
-              icon='settings'
+              subheading='Account'
+              icon='account'
             />
           </Col>
 

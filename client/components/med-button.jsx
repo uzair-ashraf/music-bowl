@@ -3,6 +3,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import SearchIcon from '@material-ui/icons/Search'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import SettingsIcon from '@material-ui/icons/Settings'
+import LibraryMusicIcon from '@material-ui/icons/LibraryMusic'
 
 export default function MedButton(props) {
   const { icon, subheading, color, link } = props
@@ -15,7 +16,8 @@ export default function MedButton(props) {
     upload: <AddCircleOutlineIcon/>,
     search: <SearchIcon/>,
     account: <AccountCircleIcon/>,
-    settings: <SettingsIcon/>
+    settings: <SettingsIcon/>,
+    library: <LibraryMusicIcon/>
   }
   return (
     <>
