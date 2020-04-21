@@ -20,6 +20,16 @@ export default class Library extends Component {
     return {}
   }
 
+  async componentDidMount() {
+    try {
+      const response = await fetch('/api/library')
+      const libraryData = await response.json()
+      console.log(libraryData)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   render() {
     return (
       <Layout>
