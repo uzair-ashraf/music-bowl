@@ -6,6 +6,7 @@ import BigButton from '../components/big-button'
 import { Row, Col } from 'reactstrap'
 import SmallButton from '../components/small-button'
 import Heading from '../components/heading'
+import Router from 'next/router'
 
 export default class Account extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ export default class Account extends Component {
       userData: {},
       isLoading: true
     }
+    this.logout = this.logout.bind(this)
   }
 
   static async getInitialProps(ctx) {
@@ -27,6 +29,19 @@ export default class Account extends Component {
       const userData = await response.json()
       if (response.status !== 200) Promise.reject(new FrontEndError(userData.message))
       this.setState({ userData, isLoading: false })
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  async logout() {
+    try {
+      const response = await fetch('/api/login', {
+        method: 'DELETE'
+      })
+      if (response.status === 200) {
+        Router.push('/')
+      }
     } catch (err) {
       console.error(err)
     }
@@ -63,7 +78,7 @@ export default class Account extends Component {
                   icon={null}
                   heading={'Logout'}
                   color='purple'
-                  onClick={null}
+                  onClick={this.logout}
                   disabled={false}
                 />
               </Col>

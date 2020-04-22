@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt')
 const route = require('express-promise-router')()
 const sql = require('../services/db')
-const { ClientError } = require('../services/errorhandling')
+const { ClientError, AuthError } = require('../services/errorhandling')
 
 route
   .post('/', async (req, res, next) => {
@@ -40,6 +40,16 @@ route
       next(err)
     }
 
+  })
+  .delete('/', async (req, res, next) => {
+    try {
+      if (req.session.userId) {
+        await req.session.destroy()
+      }
+      throw new AuthError()
+    } catch (err) {
+      next(err)
+    }
   })
 
 module.exports = route
