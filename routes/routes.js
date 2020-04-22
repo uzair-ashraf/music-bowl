@@ -5,6 +5,7 @@ const genres = require('./genres')
 const urltester = require('./urltester')
 const upload = require('./upload')
 const library = require('./library')
+const users = require('./users')
 
 router
   .use('/login', login)
@@ -12,5 +13,6 @@ router
   .use('/urltester', urltester)
   .use('/upload', upload)
   .use('/library', library)
+  .use('/users', users)
 
 module.exports = router

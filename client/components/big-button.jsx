@@ -2,7 +2,7 @@
 import Link from 'next/link'
 
 export default function BigButton(props) {
-  const { content, color, link, image } = props
+  const { content, color, link, image, profileImage } = props
 
   // const router = useRouter()
 
@@ -15,7 +15,9 @@ export default function BigButton(props) {
       <Link href={link}>
         <div className="swirl-button" type="submit">
           {
-            image ? <img src={content}/> : content
+            image ? <img
+              className={profileImage ? 'profile-image' : ''}
+              src={content}/> : content
           }
         </div>
       </Link>
@@ -23,6 +25,12 @@ export default function BigButton(props) {
         {`
         .swirl-button {
           background-image: url('${swirlBackground}');
+          }
+        .profile-image {
+          max-height: 80%;
+          max-width: 80%;
+          border-radius: 50%;
+        }
         }
         `}
       </style>

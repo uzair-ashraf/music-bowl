@@ -9,7 +9,7 @@ export default function SmallButton(props) {
     <>
       <div
         className={`
-        swirl-button small-swirl-button ${disabled ? 'disabled' : ''}
+        swirl-button small-swirl-button text-center ${disabled ? 'disabled' : ''}
         `}
         onClick={disabled ? null : onClick}
       >
