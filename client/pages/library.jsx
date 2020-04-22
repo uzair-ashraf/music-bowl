@@ -6,6 +6,8 @@ import CategoryButton from '../components/category-button'
 import LibrarySong from '../components/library-song'
 import requireAuth from '../../services/require-auth'
 import Loader from '../components/loader'
+import {FrontEndError} from '../../services/errorhandling'
+
 
 export default class Library extends Component {
   constructor(props) {
@@ -19,6 +21,7 @@ export default class Library extends Component {
     }
     this.switchView = this.switchView.bind(this)
     this.selectSong = this.selectSong.bind(this)
+    this.deleteSong = this.deleteSong.bind(this)
   }
 
   static async getInitialProps(ctx) {
@@ -43,6 +46,24 @@ export default class Library extends Component {
 
   selectSong(selectedSong) {
     this.setState({ selectedSong })
+  }
+
+  deleteSong(e, id) {
+    e.stopPropagation()
+    this.setState({ isLoading: true }, async () => {
+      try {
+        const response = await fetch(`/api/library/${id}`, {
+          method: 'DELETE'
+        })
+        const data = await response.json()
+        if (response.status === 400) await Promise.reject(new FrontEndError(data.message))
+        const { song_id } = data
+        const uploads = this.state.uploads.filter(song => song.song_id !== song_id)
+        this.setState({uploads, isLoading: false})
+      } catch(err) {
+        console.error(err)
+      }
+    })
   }
 
   render() {
@@ -86,6 +107,7 @@ export default class Library extends Component {
                         <LibrarySong
                           key={song.song_id}
                           selectSong={this.selectSong}
+                          deleteSong={this.deleteSong}
                           isOpen={selectedSong === song.song_id}
                           {...song}
                         />

@@ -1,6 +1,6 @@
 const route = require('express-promise-router')()
 const sql = require('../services/db')
-const { AuthError } = require('../services/errorhandling')
+const { AuthError, ClientError } = require('../services/errorhandling')
 
 route
   .get('/', async (req, res, next) => {
@@ -37,6 +37,30 @@ route
       `
       response.uploads = uploadsData
       res.json(response)
+    } catch (err) {
+      console.error(err)
+      next(err)
+    }
+  })
+  .delete('/:id', async (req, res, next) => {
+    try {
+      if (!req.session.userId) throw new AuthError()
+      const { id } = req.params
+      const { userId } = req.session
+
+      const deleteResponse = await sql`
+        DELETE FROM songs
+        WHERE song_id = ${id}
+        AND user_id = ${userId}
+        RETURNING song_id;
+      `
+      if (!deleteResponse.count) throw new ClientError('Request was unsuccessful', 400)
+
+      const [response] = deleteResponse
+      response.success = true
+
+      res.json(response)
+
     } catch (err) {
       console.error(err)
       next(err)
