@@ -1,61 +1,45 @@
 const route = require('express-promise-router')()
-const s3 = require('../services/s3')
-const db = require('../services/db')
-const fs = require('fs')
-const path = require('path')
+const uploadS3 = require('../services/s3')
+const sql = require('../services/db')
+const { ClientError, ServerError, AuthError } = require('../services/errorhandling')
+
+const uploadImage = uploadS3.single('profile-image')
 
 route.post('/', async (req, res, next) => {
   try {
-    const uploadParams = {
-      Bucket: process.env.BUCKET_NAME,
-      Key: '',
-      Body: ''
+    if (!req.session.userId) throw new AuthError()
+
+    const url = await new Promise((resolve, reject) => {
+      uploadImage(req, res, err => {
+        if (err) {
+          if (err.code === 'LIMIT_FILE_SIZE') {
+            reject(new ClientError('Image must be less than 1mb in size', 413))
+          } else if (err instanceof ClientError) {
+            reject(err)
+          } else {
+            reject(new ServerError('Unexpected Error Occurred', 500))
+          }
+        } else {
+          resolve(req.file.location)
+        }
+      })
+    })
+
+    const { userId } = req.session
+    const response = await sql`
+      UPDATE users SET ${
+        sql({ image: url }, 'image')
+      }
+      WHERE user_id = ${userId}
+      RETURNING image;
+    `
+    if (!response.count) {
+      throw new new ServerError('Unexpected Error Occurred', 500)()
+    } else {
+      const [image] = response
+      res.json({ image })
     }
 
-    // Call S3 to list the buckets
-    // s3.listObjects(bucketParams, function (err, data) {
-    //   if (err) {
-    //     console.log('Error', err)
-    //   } else {
-    //     console.log('Success', data)
-    //   }
-    // })
-
-    // var file = process.argv[3];
-
-    // Configure the file stream and obtain the upload parameters
-    // var fileStream = fs.createReadStream(file);
-
-    // fileStream.on('error', function (err) {
-    //   console.log('File Error', err);
-    // });
-    // uploadParams.Body = fileStream;
-    // uploadParams.Key = path.basename(file);
-
-    // s3.putObject({
-    //   Bucket: BUCKET,
-    //   Body: fs.readFileSync(localImage),
-    //   Key: imageRemoteName
-    // })
-    //   .promise()
-    //   .then(response => {
-    //     console.log(`done! - `, response)
-    //     console.log(
-    //       `The URL is ${s3.getSignedUrl('getObject', { Bucket: BUCKET, Key: imageRemoteName })}`
-    //     )
-    //   })
-    //   .catch(err => {
-    //     console.log('failed:', err)
-    //   })
-
-    // // call S3 to retrieve upload file to specified bucket
-    // s3.upload(uploadParams, function (err, data) {
-    //   if (err) {
-    //     console.log("Error", err);
-    //   } if (data) {
-    //     console.log("Upload Success", data.Location);
-    //   }
-    // });
   } catch (err) {
     console.error(err)
     next(err)

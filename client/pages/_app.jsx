@@ -52,6 +52,9 @@ class MyApp extends App {
               border-radius: 19px;
               height: 80vh;
             }
+            .hidden {
+              display: none
+            }
             `}
         </style>
       </div>
