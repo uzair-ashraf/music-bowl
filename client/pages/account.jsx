@@ -14,7 +14,8 @@ export default class Account extends Component {
     super(props)
     this.state = {
       userData: {},
-      isLoading: true
+      isLoading: true,
+      errorMessage: ''
     }
     this.logout = this.logout.bind(this)
     this.triggerImageUpload = this.triggerImageUpload.bind(this)
@@ -31,7 +32,7 @@ export default class Account extends Component {
     try {
       const response = await fetch('/api/users')
       const userData = await response.json()
-      if (response.status !== 200) Promise.reject(new FrontEndError(userData.message))
+      if (response.status !== 200) await Promise.reject(new FrontEndError(userData.message))
       this.setState({ userData, isLoading: false })
     } catch (err) {
       console.error(err)
@@ -52,19 +53,28 @@ export default class Account extends Component {
   }
 
   async uploadImage(e) {
+    this.setState({ errorMessage: '', isLoading: true })
     try {
       const imageData = new FormData()
       const fileName = uuidv4()
-      const [image] = e.target.files
-      imageData.append('profile-image', image, fileName + image.name)
+      const [imageToUpload] = e.target.files
+      imageData.append('profile-image', imageToUpload, fileName + imageToUpload.name)
       const response = await fetch('/api/images', {
         method: 'POST',
         body: imageData
       })
       const imageResponse = await response.json()
-      console.log(imageResponse)
+      if (response.status.toString()[0] === '4') await Promise.reject(new FrontEndError(imageResponse.message))
+      const { image } = imageResponse
+      const userData = { ...this.state.userData, image }
+      this.setState({ userData, errorMessage: '', isLoading: false })
     } catch (err) {
       console.error(err)
+      if (err instanceof FrontEndError) {
+        this.setState({ errorMessage: err.message, isLoading: false })
+      } else {
+        this.setState({ errorMessage: 'Unexpected error occurred', isLoading: false })
+      }
     }
   }
 
@@ -73,7 +83,7 @@ export default class Account extends Component {
   }
 
   render() {
-    const { isLoading, userData } = this.state
+    const { isLoading, userData, errorMessage } = this.state
     return (
       <Layout>
         <Row>
@@ -89,6 +99,9 @@ export default class Account extends Component {
               profileImage={true}
             />
             <Row className=" d-flex justify-content-center align-items-center mt-5 pt-5">
+              <div className="text-center text-danger">
+                {errorMessage}
+              </div>
               <Col xs='6'>
                 <input
                   type="file"
@@ -100,7 +113,7 @@ export default class Account extends Component {
                   heading='Update Photo'
                   color='blue'
                   onClick={this.triggerImageUpload}
-                  disabled={false}
+                  disabled={!!isLoading}
                 />
               </Col>
               <Col xs='6'>
@@ -109,7 +122,7 @@ export default class Account extends Component {
                   heading={'Logout'}
                   color='purple'
                   onClick={this.logout}
-                  disabled={false}
+                  disabled={!!isLoading}
                 />
               </Col>
             </Row>

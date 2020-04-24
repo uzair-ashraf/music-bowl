@@ -36,7 +36,7 @@ route.post('/', async (req, res, next) => {
     if (!response.count) {
       throw new new ServerError('Unexpected Error Occurred', 500)()
     } else {
-      const [image] = response
+      const [{ image }] = response
       res.json({ image })
     }
 
