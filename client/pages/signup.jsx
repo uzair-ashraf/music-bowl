@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Container, Row, Col } from 'reactstrap'
 import BigButton from '../components/big-button'
 import { withRouter } from 'next/router'
+import {FrontEndError} from '../../services/errorhandling'
 
 class SignUp extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class SignUp extends Component {
       password: '',
       confirmPassword: '',
       email: '',
+      successMessage: '',
       errorMessages: ['', '', '', '']
     }
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -33,11 +35,39 @@ class SignUp extends Component {
         },
         body: JSON.stringify({ username, password, email })
       })
-      console.log(response)
-      const data = await response.json()
-      console.log(data)
+      if(response.status === 200) {
+        this.setState({successMessage: "Thank you for signing up! You will be redirected."}, () => {
+          setTimeout(() => { this.props.router.push('/login')},
+          4000)
+        })
+      } else if(response.status === 409) {
+        const data = await response.json()
+        await Promise.reject(new FrontEndError(data.message))
+      } else {
+        await Promise.reject(new Error("Unexpected Error Occurred"))
+      }
     } catch (err) {
-      console.log(err.message)
+      if(err instanceof FrontEndError) {
+        const resetState = {
+          username: '',
+          password: '',
+          confirmPassword: '',
+          email: '',
+        }
+        const {message} = err
+        let errorMessages = ['', '', '', '']
+        if(message === 'users_username_email_key') {
+          errorMessages[0] = "Username already exists"
+          errorMessages[3] = "Email already exists"
+        } else if (message === 'username_unique') {
+          errorMessages[0] = "Username already exists"
+        } else {
+          errorMessages[3] = 'Email already exists'
+        }
+        this.setState({...resetState, errorMessages})
+      } else {
+        console.error(err)
+      }
     }
   }
 
@@ -98,7 +128,8 @@ class SignUp extends Component {
       username,
       password,
       confirmPassword,
-      email
+      email,
+      successMessage
     } = this.state;
     return (
       <Container>
@@ -142,6 +173,9 @@ class SignUp extends Component {
                   required
                 />
               </form>
+              <div className="success-message text-success text-center">
+                {successMessage}
+              </div>
               <div className="swirl-button" onClick={this.handleSubmit}>
                 Sign Up
               </div>
