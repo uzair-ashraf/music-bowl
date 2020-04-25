@@ -7,9 +7,10 @@ const upload = require('./upload')
 const library = require('./library')
 const users = require('./users')
 const images = require('./images')
-
+const signup = require('./signup')
 router
   .use('/login', login)
+  .use('/signup', signup)
   .use('/genres', genres)
   .use('/urltester', urltester)
   .use('/upload', upload)
