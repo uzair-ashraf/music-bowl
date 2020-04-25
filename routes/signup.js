@@ -10,11 +10,14 @@ route
 
       const hash = await bcrypt.hash(password, 12)
 
-      const response = await sql`
+      await sql`
       INSERT INTO users ${
         sql({ username, password: hash, email }, 'username', 'password', 'email')
       }
       `
+      if (req.session.userId) {
+        await req.session.destroy()
+      }
       res.json({ success: true })
     } catch (err) {
       if (err.code === '23505') {
