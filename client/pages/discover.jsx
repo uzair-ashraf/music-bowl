@@ -6,6 +6,7 @@ import Heading from '../components/heading'
 import GenreButton from '../components/genre-button'
 import Loader from '../components/loader'
 import Link from 'next/link'
+import DiscoverSong from '../components/discover-song'
 
 export default class Discover extends Component {
   constructor(props) {
@@ -66,7 +67,14 @@ export default class Discover extends Component {
               : (
                 songs.length
                 ? (
-                  null
+                  <>
+                    <Heading
+                      username={songs[0].username}
+                    />
+                    <DiscoverSong
+                      {...songs[0]}
+                    />
+                  </>
                 )
                 : (
                   <div className="d-flex justify-content-center h-100 align-items-center">
