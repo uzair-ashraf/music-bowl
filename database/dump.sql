@@ -333,6 +333,28 @@ Bad News Is Coming	https://open.spotify.com/track/1TRIYxcVJYPki5AX2hZzZT?si=6vk_
 Chains And Things	https://open.spotify.com/track/5x7Oxaa9EEIx9nw17CC5yW?si=-bd73KXQSfuazbGliX_wBg	2	3	27	104	spotify:track:5x7Oxaa9EEIx9nw17CC5yW
 Now That I'm Down	https://open.spotify.com/track/6eIJfQX1WPU2iOFe1x605S	2	3	27	105	spotify:track:6eIJfQX1WPU2iOFe1x605S
 Short Dressed Woman	https://open.spotify.com/track/6tilCYbheGMHo3Hw4F22hF?si=wTC7pxOCSnSFlQAIV1-zeg	2	3	27	107	spotify:track:6tilCYbheGMHo3Hw4F22hF
+Part Time Love	https://open.spotify.com/track/7p5Xpx7dd9wSPJF4Q4Nfbu?si=0Wmwm7jZTWmRplF-HWmr0g	2	3	30	108	spotify:track:7p5Xpx7dd9wSPJF4Q4Nfbu
+Bad News Is Coming	https://open.spotify.com/track/1TRIYxcVJYPki5AX2hZzZT?si=Y4zVetaaT6WqjQItcMaASA	2	3	30	109	spotify:track:1TRIYxcVJYPki5AX2hZzZT
+Chains And Things	https://open.spotify.com/track/5x7Oxaa9EEIx9nw17CC5yW?si=_sALlogAQtCArnSCgzP6lg	2	3	30	110	spotify:track:5x7Oxaa9EEIx9nw17CC5yW
+Now That I'm Down	https://open.spotify.com/track/6eIJfQX1WPU2iOFe1x605S	2	3	30	111	spotify:track:6eIJfQX1WPU2iOFe1x605S
+Stone Crazy	https://open.spotify.com/track/3FVpPBl3Jbd5TRLUFZamO9?si=O507sXwJSDOSXkzoZEURTA	2	3	30	112	spotify:track:3FVpPBl3Jbd5TRLUFZamO9
+Cold, Cold Feeling	https://open.spotify.com/track/7sheAObhEOIqDY8YFu3HJf	2	3	30	113	spotify:track:7sheAObhEOIqDY8YFu3HJf
+Chris Stapleton - Tennessee Whiskey (Audio)	https://www.youtube.com/watch?v=4zAThXFOy2c&list=PLjzeyhEA84sQKuXp-rpM1dFuL2aQM_a3S	1	3	30	114	4zAThXFOy2c
+Gary B.B. Coleman - The Sky is Crying	https://www.youtube.com/watch?v=71Gt46aX9Z4&list=PLjzeyhEA84sQKuXp-rpM1dFuL2aQM_a3S&index=2	1	3	30	115	71Gt46aX9Z4
+Alannah Myles - Black Velvet (Official Video)	https://www.youtube.com/watch?v=tT4d1LQy4es&list=PLjzeyhEA84sQKuXp-rpM1dFuL2aQM_a3S&index=3	1	3	30	116	tT4d1LQy4es
+Nina Simone  Feeling Good	https://www.youtube.com/watch?v=D5Y11hwjMNs&list=PLjzeyhEA84sQKuXp-rpM1dFuL2aQM_a3S&index=4	1	3	30	117	D5Y11hwjMNs
+Moonlight Sonata 3rd Movement	https://open.spotify.com/track/6JlK4T57sOrLGgur7sfVIu?si=HnBkpwk8T36V4p2bSIcahw	2	4	31	118	spotify:track:6JlK4T57sOrLGgur7sfVIu
+Sonata No. 9 in A Major for Violin and Piano, Op. 47, "Kreutzer Sonata": I. Adagio sostenuto - Presto	https://open.spotify.com/track/4UpSi6Fg7kIJgO73kcTbBB	2	4	31	119	spotify:track:4UpSi6Fg7kIJgO73kcTbBB
+Introduction and Rondo capriccioso in A minor, Op. 28	https://open.spotify.com/track/3leTyhTguxLryLUoRaxQ19?si=cDasiRwiT06L-0OmjZg88wv	2	4	31	120	spotify:track:3leTyhTguxLryLUoRaxQ19
+12 Etudes, Op. 10: Etude No. 4 in C-Sharp Minor, Op. 10, No. 4	https://open.spotify.com/track/7JA2TSkGHpBpEIUaf7liXl?si=WSU3v08QQc210RNlPsJUJg	2	4	31	121	spotify:track:7JA2TSkGHpBpEIUaf7liXl
+12 Etudes, Op. 25: Etude No. 23 in A Minor, Op. 25, No. 11, "Winter Wind"	https://open.spotify.com/track/5F0sYwEmc7ubQv3nMH1cRo?si=ImQRD8_ZRWyMYQloDPp43Q	2	4	31	123	spotify:track:5F0sYwEmc7ubQv3nMH1cRo
+Alt-Wiener Tanzweisen (Old Viennese Melodies): II. Liebesleid (Love's Sorrow)	https://open.spotify.com/track/1zjQtvIDYcA9920amNO5G2	2	4	31	124	spotify:track:1zjQtvIDYcA9920amNO5G2
+Liebesleid (Love's Sorrow)	https://open.spotify.com/track/38EmZT3oWA6lJE0o4ajfG8?si=UC_LKIdlRJq7FZPm0fyq0A	2	4	31	125	spotify:track:38EmZT3oWA6lJE0o4ajfG8
+Haendel - Sarabande	https://www.youtube.com/watch?v=klPZIGQcrHA&list=PL4FJJw7rbiIJkALPq6SY0_s1i2fE3NMYU	1	4	31	126	klPZIGQcrHA
+Pachelbel's Canon	https://www.youtube.com/watch?v=stCKjZniMsQ&list=PL4FJJw7rbiIJkALPq6SY0_s1i2fE3NMYU&index=2	1	4	31	127	stCKjZniMsQ
+Vivaldi: Concerto for 4 Violins in B minor RV 580	https://www.youtube.com/watch?v=SY3Kxf7ZTeI&list=PL4FJJw7rbiIJkALPq6SY0_s1i2fE3NMYU&index=3	1	4	31	129	SY3Kxf7ZTeI
+Antonio Vivaldi - The Four Seasons| Антонио Вивальди - Времена года	https://www.youtube.com/watch?v=VG6j4Kp72wM&list=PL4FJJw7rbiIJkALPq6SY0_s1i2fE3NMYU&index=4	1	4	31	130	VG6j4Kp72wM
+Dominic Miller - Air on a G string - JS Bach HD	https://www.youtube.com/watch?v=311usK62JOA&list=PL4FJJw7rbiIJkALPq6SY0_s1i2fE3NMYU&index=5	1	4	31	131	311usK62JOA
 \.
 
 
@@ -346,8 +368,6 @@ uzinatorcl	$2b$12$sl4SDHC3S3xMuB59APXK5..VHJ56hGU7HBoLbhE9XM5Wpts9DGtM2	uzinator
 uzinatorcldrf	$2b$12$7elJ2FsuzJ2gG4MDKdKqwuF3BcUhFtdzy8dA2jD5gd4.8/JH8UpWm	uzindatorcl@live.com	/images/default-user-image.png	15
 uzinatforcl	$2b$12$WQ2MB89GOijsByvKc16GAOy63/abMPnt6XyVGe3heLtr5h7QzfCgO	uzinatdorcl@live.com	/images/default-user-image.png	18
 shadoki	$2b$12$C6Y1viWKliXWa3ZpWSl4gOOeiBaAKqCpTNEhzuIVtgTJyVPnE0Lq.	badrabbitcode@gmail.com	/images/default-user-image.png	19
-daredevil	$2b$12$WNa39/jDLCWSJdpDesZs9ePbj0BnMvujQWoI81iOvqX05g8st4dOS	222@222.com	/images/default-user-image.png	30
-guard	$2b$12$pz16Ysc8HPkmmftA4RL65eZtuvDuXX.70fRT3d3Y/29oudP5p7coq	333@333.com	/images/default-user-image.png	31
 ray	$2b$12$PYgUj1NkV5TfSoGx8dXEteJLm04C23pHZ88JjYNiSC5o5SAlijMAa	444@444.com	/images/default-user-image.png	32
 resonate	$2b$12$M/MH1V.BfLEvg/07LKm9bu9kq96phAWzXnkijdQ6pIv6i9jFYiXUm	555@555.com	/images/default-user-image.png	33
 whimbrel	$2b$12$wKyR3GC7/yEdcDqQ.zh8lOEvfOZf3.F0NP6tpZ7BLW6Hq2os14WNO	666@666.com	/images/default-user-image.png	34
@@ -358,6 +378,9 @@ cloud	$2b$12$OFmkHpFdtf2HQ238Jnihc.LSo4VSbZVUU6btxuJQgXdyeHLEuRxlW	0111@111.com	
 ziggy	$2b$12$d30.JmuOYZDX5v2CPfdL6uYRu0zXIOLJ4QhovrUkmiHye2REaVsPq	022@111.com	/images/default-user-image.png	39
 slapstick	$2b$12$sXzRBRNpYsXbec6bhS5HTOb26AcuZCi0u4SCnEJanXK2baKO5CF8G	111@111.com	https://ashraf-bucket.s3.us-east-2.amazonaws.com/5d504a90-7e08-4d60-91f4-ebcc3aa213f31-10918_music-notes-high-quality-png-web-icons-png.png	28
 wetrix	$2b$12$.Uh9iNJbOVSaro0PsTNEKOr4BPRHcuSPfXwEY4GCZ4ANCrPkicqV.	wetrix101@gmail.com	https://ashraf-bucket.s3.us-east-2.amazonaws.com/96ec0c05-e4d0-4c19-a423-bb1b6b6cad401524406564576.jpg	26
+daredevil	$2b$12$WNa39/jDLCWSJdpDesZs9ePbj0BnMvujQWoI81iOvqX05g8st4dOS	222@222.com	https://ashraf-bucket.s3.us-east-2.amazonaws.com/7942398d-e2a2-4565-a735-9a2f734d9324sending-hugs.gif	30
+guard	$2b$12$pz16Ysc8HPkmmftA4RL65eZtuvDuXX.70fRT3d3Y/29oudP5p7coq	333@333.com	https://ashraf-bucket.s3.us-east-2.amazonaws.com/0fe6fc56-7b79-4775-ac10-ef7be884a658whaa.png	31
+thebearingedge	$2b$12$LeUTnTV7MPtQ.GaxChoqA.LlIQJ2qLHVyLC54t3kK1BnlQyM0hSYa	thebearingedge@gmail.com	/images/default-user-image.png	41
 \.
 
 
@@ -386,14 +409,14 @@ SELECT pg_catalog.setval('public.providers_provider_id_seq', 2, true);
 -- Name: songs_song_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dev
 --
 
-SELECT pg_catalog.setval('public.songs_song_id_seq', 107, true);
+SELECT pg_catalog.setval('public.songs_song_id_seq', 163, true);
 
 
 --
 -- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dev
 --
 
-SELECT pg_catalog.setval('public.users_user_id_seq', 39, true);
+SELECT pg_catalog.setval('public.users_user_id_seq', 41, true);
 
 
 --
