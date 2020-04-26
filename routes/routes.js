@@ -8,6 +8,7 @@ const library = require('./library')
 const users = require('./users')
 const images = require('./images')
 const signup = require('./signup')
+const songs = require('./songs')
 router
   .use('/login', login)
   .use('/signup', signup)
@@ -17,5 +18,6 @@ router
   .use('/library', library)
   .use('/users', users)
   .use('/images', images)
+  .use('/songs', songs)
 
 module.exports = router

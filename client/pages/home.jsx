@@ -34,10 +34,10 @@ export default class Home extends Component {
           </Col>
           <Col xs='6'>
             <MedButton
-              link='/search'
+              link='/discover'
               color='purple'
-              subheading='Search'
-              icon='search'
+              subheading='Discover'
+              icon='discover'
             />
           </Col>
           <Col xs='6'>
