@@ -7,6 +7,7 @@ import GenreButton from '../components/genre-button'
 import Loader from '../components/loader'
 import Link from 'next/link'
 import DiscoverSong from '../components/discover-song'
+import DiscoverButton from '../components/discover-button'
 
 export default class Discover extends Component {
   constructor(props) {
@@ -68,12 +69,43 @@ export default class Discover extends Component {
                 songs.length
                 ? (
                   <>
-                    <Heading
-                      username={songs[0].username}
-                    />
+                    <div className="mt-2">
+                      <Heading
+                        username={songs[0].username}
+                      />
+                    </div>
                     <DiscoverSong
                       {...songs[0]}
                     />
+                    <Row>
+                        <Col xs='6'>
+                          <DiscoverButton
+                            icon='songskip'
+                            heading='Next Song'
+                            color='purple'
+                            onClick={null}
+                            disabled={isLoading}
+                          />
+                        </Col>
+                        <Col xs='6'>
+                          <DiscoverButton
+                            icon='newgenre'
+                            heading='New Genre'
+                            color='blue'
+                            onClick={null}
+                            disabled={isLoading}
+                          />
+                        </Col>
+                        <Col xs='6'>
+                          <DiscoverButton
+                            icon='favorite'
+                            heading='Favorite'
+                            color='purple'
+                            onClick={null}
+                            disabled={isLoading}
+                          />
+                        </Col>
+                    </Row>
                   </>
                 )
                 : (
@@ -100,9 +132,11 @@ export default class Discover extends Component {
           <Container>
             <Row>
               <Col xs='12' className="m-2">
-                <Heading
+                <div className="m-2">
+                  <Heading
                   heading='Select a Genre'
-                />
+                  />
+                </div>
                 <Row>
                   {
                     genres.map((genre, index) => (
