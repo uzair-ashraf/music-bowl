@@ -34,6 +34,8 @@ route
                           ON
                             s.user_id = u.user_id
                           WHERE
+                            s.user_id != ${userId}
+                          AND
                             s.song_id
                           NOT IN (
                           SELECT
@@ -71,6 +73,8 @@ route
                             s.user_id = u.user_id
                           WHERE
                             s.genre_id = ${genreId}
+                          AND
+                            s.user_id != ${userId}
                           AND
                             s.song_id
                           NOT IN (

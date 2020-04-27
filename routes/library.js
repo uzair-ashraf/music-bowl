@@ -35,7 +35,37 @@ route
             s.song_id DESC
           ;
       `
+      const favoritesData = await sql`
+          SELECT
+            f.favorite_id,
+            f.song_id,
+            s.title,
+            s.url,
+            s.video_id,
+            p.provider_name,
+            g.genre
+          FROM
+            favorites AS f
+          JOIN
+            songs AS s
+          USING
+            (song_id)
+          JOIN
+            providers AS p
+          USING
+            (provider_id)
+          JOIN
+            genre AS g
+          USING
+            (genre_id)
+          WHERE
+            f.user_id = ${userId}
+          ORDER BY
+          f.favorite_id DESC
+          ;
+      `
       response.uploads = uploadsData
+      response.favorites = favoritesData
       res.json(response)
     } catch (err) {
       console.error(err)

@@ -7,6 +7,7 @@ import LibrarySong from '../components/library-song'
 import requireAuth from '../../services/require-auth'
 import Loader from '../components/loader'
 import {FrontEndError} from '../../services/errorhandling'
+import Link from 'next/link'
 
 
 export default class Library extends Component {
@@ -41,7 +42,7 @@ export default class Library extends Component {
   }
 
   switchView(view) {
-    this.setState({ view })
+    this.setState({ view, selectedSong: null })
   }
 
   selectSong(selectedSong) {
@@ -103,18 +104,60 @@ export default class Library extends Component {
                 : (
                   view === 'Uploads'
                     ? (
+                      !!uploads.length
+                      ? (
                       uploads.map(song => (
                         <LibrarySong
                           key={song.song_id}
                           selectSong={this.selectSong}
                           deleteSong={this.deleteSong}
                           isOpen={selectedSong === song.song_id}
+                          view={view}
                           {...song}
                         />
                       ))
+                      )
+                      : (
+                    <div className="text-center mt-2">
+                      Seems like you have no uploads.
+                      Would you like to &nbsp;
+                      <span>
+                        <Link href="/upload">
+                          <a>
+                            upload songs?
+                          </a>
+                        </Link>
+                      </span>
+                    </div>
+                      )
                     )
                     : (
-                      null
+                      !!favorites.length
+                      ? (
+                       favorites.map(song => (
+                        <LibrarySong
+                          key={song.favorite_id}
+                          selectSong={this.selectSong}
+                          deleteSong={this.deleteSong}
+                          isOpen={selectedSong === song.song_id}
+                          view={view}
+                          {...song}
+                        />
+                       ))
+                      )
+                      : (
+                    <div className="text-center mt-2">
+                      Seems like you have no favorites.
+                      Would you like to &nbsp;
+                      <span>
+                        <Link href="/discover">
+                          <a>
+                            discover new songs?
+                          </a>
+                        </Link>
+                      </span>
+                    </div>
+                      )
                     )
                 )
             }
