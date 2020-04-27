@@ -3,7 +3,6 @@ import YouTube from 'react-youtube'
 import SpotifyPlayer from '../components/spotify-player'
 
 export default function DiscoverSong(props) {
-  console.log(props)
   const {
     provider_name,
     video_id,
@@ -15,24 +14,24 @@ export default function DiscoverSong(props) {
       {
         provider_name === 'youtube'
           ? (
-            <div className="player-container mt-5">
+            <div className="player-container mt-1">
               <YouTube
                 videoId={video_id}
                 opts={{
-                  height: '160',
+                  height: '200',
                   width: '100%'
                 }}
               />
             </div>
           )
           : (
-            <div className="player-container mt-5">
+            <div className="player-container mt-1">
               <SpotifyPlayer
                 uri={video_id}
                 view='list'
                 theme='black'
                 width='100%'
-                height='160'
+                height='200'
               />
             </div>
           )

@@ -20,6 +20,8 @@ export default class Discover extends Component {
     }
     this.setGenre = this.setGenre.bind(this)
     this.getSongs = this.getSongs.bind(this)
+    this.resetDiscover = this.resetDiscover.bind(this)
+    this.nextSong = this.nextSong.bind(this)
   }
 
   async componentDidMount() {
@@ -42,15 +44,34 @@ export default class Discover extends Component {
   }
 
   async getSongs() {
-    const {selectedGenre} = this.state
+    let {selectedGenre, genres} = this.state
+    if(selectedGenre === "random") {
+      selectedGenre = genres[Math.floor(Math.random() * genres.length)].genre_id
+    }
     try {
-      const response = await fetch(`/api/songs/${selectedGenre}`)
+      const response = await fetch(`/api/discover/${selectedGenre}`)
       const songs = await response.json()
       this.setState({songs, isLoading: false})
     } catch (err) {
       console.error(err)
     }
   }
+
+  resetDiscover() {
+    this.setState({
+      selectedGenre: null,
+      songs: [],
+      isLoading: true
+    })
+  }
+
+  nextSong() {
+    const songs = [...this.state.songs]
+    songs.shift()
+    this.setState({songs})
+  }
+
+
 
   render() {
     const { selectedGenre, genres, isLoading, songs } = this.state
@@ -77,26 +98,26 @@ export default class Discover extends Component {
                     <DiscoverSong
                       {...songs[0]}
                     />
-                    <Row>
-                        <Col xs='6'>
+                    <Row className="mb-2">
+                        <Col xs='4'>
                           <DiscoverButton
                             icon='songskip'
                             heading='Next Song'
                             color='purple'
-                            onClick={null}
+                            onClick={this.nextSong}
                             disabled={isLoading}
                           />
                         </Col>
-                        <Col xs='6'>
+                        <Col xs='4'>
                           <DiscoverButton
                             icon='newgenre'
                             heading='New Genre'
                             color='blue'
-                            onClick={null}
+                            onClick={this.resetDiscover}
                             disabled={isLoading}
                           />
                         </Col>
-                        <Col xs='6'>
+                        <Col xs='4'>
                           <DiscoverButton
                             icon='favorite'
                             heading='Favorite'
@@ -120,7 +141,15 @@ export default class Discover extends Component {
                           </a>
                         </Link>
                       </span>
-                      &nbsp; for this genre?
+                      &nbsp; for this genre? &nbsp;
+                          Or would you like to &nbsp;
+                      <span onClick={this.resetDiscover}>
+                        <Link href="/discover">
+                          <a>
+                            select a new genre?
+                          </a>
+                        </Link>
+                      </span>
                     </div>
                   </div>
                 )
@@ -138,6 +167,24 @@ export default class Discover extends Component {
                   />
                 </div>
                 <Row>
+                  <Col xs='6'
+                  >
+                    <GenreButton
+                      onClick={this.setGenre}
+                      heading="All"
+                      color='purple'
+                      genreId="all"
+                    />
+                  </Col>
+                  <Col xs='6'
+                  >
+                    <GenreButton
+                      onClick={this.setGenre}
+                      heading="Random"
+                      color='blue'
+                      genreId="random"
+                    />
+                  </Col>
                   {
                     genres.map((genre, index) => (
                       <Col xs='6'

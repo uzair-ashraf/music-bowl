@@ -41,8 +41,11 @@ class MyApp extends App {
             font-size: 2.8rem;
             box-shadow: 7px 13px 20px rgba(0, 0, 0, 0.25);
             }
-            svg.MuiSvgIcon-root {
+            .med-swirl-button > svg.MuiSvgIcon-root {
             font-size: 4.5rem !important;
+            }
+            .discover-button > svg.MuiSvgIcon-root {
+            font-size: 2.8rem !important;
             }
             .inner-page {
               background-image: url('/images/purp-swirl.png')
@@ -50,7 +53,7 @@ class MyApp extends App {
             .inner-page-card {
               background-color: white;
               border-radius: 19px;
-              height: 80vh;
+              height: 83vh;
             }
             .hidden {
               display: none

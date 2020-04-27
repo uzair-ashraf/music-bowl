@@ -10,7 +10,7 @@ export default function DiscoverButton(props) {
     : '/images/purp-swirl.png'
 
   const iconTable = {
-    songskip: <SkipNextIcon />,
+    songskip: <SkipNextIcon style={{ fontSize: '2rem' }} />,
     favorite: <FavoriteIcon />,
     newgenre: <AutorenewIcon />
   }
@@ -18,7 +18,7 @@ export default function DiscoverButton(props) {
     <>
       <div
         className={`
-        swirl-button small-swirl-button text-center ${disabled ? 'disabled' : ''}
+        swirl-button discover-button text-center ${disabled ? 'disabled' : ''}
         `}
         onClick={disabled ? null : onClick}
       >
@@ -30,16 +30,16 @@ export default function DiscoverButton(props) {
       </div>
       <style jsx>
         {`
-        .small-swirl-button {
+        .discover-button {
           background-image: url('${swirlBackground}');
-          height: 100px;
-          width: 100px;
-          font-size: 1.1rem;
+          height: 80px;
+          width: 80px;
+          font-size: .8rem;
           position: relative;
         }
         .swirl-subheading {
           position: absolute;
-          font-size: .8rem !important;
+          font-size: .6rem !important;
           bottom: 8px;
         }
         .disabled {
