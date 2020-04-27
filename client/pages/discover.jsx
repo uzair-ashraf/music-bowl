@@ -8,6 +8,7 @@ import Loader from '../components/loader'
 import Link from 'next/link'
 import DiscoverSong from '../components/discover-song'
 import DiscoverButton from '../components/discover-button'
+import {FrontEndError} from '../../services/errorhandling'
 
 export default class Discover extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ export default class Discover extends Component {
     this.getSongs = this.getSongs.bind(this)
     this.resetDiscover = this.resetDiscover.bind(this)
     this.nextSong = this.nextSong.bind(this)
+    this.favoriteSong = this.favoriteSong.bind(this)
   }
 
   async componentDidMount() {
@@ -55,6 +57,25 @@ export default class Discover extends Component {
     } catch (err) {
       console.error(err)
     }
+  }
+  async favoriteSong() {
+    this.setState({isLoading: true})
+    try {
+      const [song] = this.state.songs
+      const response = await fetch(`/api/discover/${song.song_id}`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+      const data = response.json()
+      if(!response.ok) await Promise.reject(new FrontEndError(data.message))
+      this.setState({isLoading: false}, this.nextSong)
+    } catch(err) {
+      console.error(err)
+    }
+
   }
 
   resetDiscover() {
@@ -122,7 +143,7 @@ export default class Discover extends Component {
                             icon='favorite'
                             heading='Favorite'
                             color='purple'
-                            onClick={null}
+                            onClick={this.favoriteSong}
                             disabled={isLoading}
                           />
                         </Col>

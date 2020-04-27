@@ -1,6 +1,7 @@
+/* eslint-disable camelcase */
 const route = require('express-promise-router')()
 const sql = require('../services/db')
-const { AuthError, ServerError } = require('../services/errorhandling')
+const { AuthError } = require('../services/errorhandling')
 
 route
   .get('/:genreId', async (req, res, next) => {
@@ -85,6 +86,25 @@ route
                     `
       res.json(songs)
 
+    } catch (err) {
+      console.error(err)
+      next(err)
+    }
+  })
+  .post('/:songId', async (req, res, next) => {
+    try {
+      if (!req.session.userId) throw new AuthError()
+      const { userId: user_id } = req.session
+      const { songId: song_id } = req.params
+      const insertedId = await sql`
+        INSERT INTO favorites ${
+        sql({ user_id, song_id }, 'user_id', 'song_id')
+        }
+        RETURNING song_id
+      `
+      res.json({
+        insertedId
+      })
     } catch (err) {
       console.error(err)
       next(err)
