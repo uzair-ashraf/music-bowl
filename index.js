@@ -24,8 +24,8 @@ app.prepare().then(() => {
   server.use(session({
     store: new FileStore(fileStoreOptions),
     secret: process.env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    resave: false,
     rolling: true
   }))
   server.use(express.static(path.join(__dirname, '/public')))
