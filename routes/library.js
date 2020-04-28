@@ -39,6 +39,7 @@ route
           SELECT
             f.favorite_id,
             f.song_id,
+            u.username,
             s.title,
             s.url,
             s.video_id,
@@ -58,6 +59,10 @@ route
             genre AS g
           USING
             (genre_id)
+          JOIN
+            users AS u
+          ON
+            s.user_id = u.user_id
           WHERE
             f.user_id = ${userId}
           ORDER BY
@@ -72,7 +77,7 @@ route
       next(err)
     }
   })
-  .delete('/:id', async (req, res, next) => {
+  .delete('/uploads/:id', async (req, res, next) => {
     try {
       if (!req.session.userId) throw new AuthError()
       const { id } = req.params
@@ -83,6 +88,30 @@ route
         WHERE song_id = ${id}
         AND user_id = ${userId}
         RETURNING song_id;
+      `
+      if (!deleteResponse.count) throw new ClientError('Request was unsuccessful', 400)
+
+      const [response] = deleteResponse
+      response.success = true
+
+      res.json(response)
+
+    } catch (err) {
+      console.error(err)
+      next(err)
+    }
+  })
+  .delete('/favorites/:id', async (req, res, next) => {
+    try {
+      if (!req.session.userId) throw new AuthError()
+      const { id } = req.params
+      const { userId } = req.session
+
+      const deleteResponse = await sql`
+        DELETE FROM favorites
+        WHERE favorite_id = ${id}
+        AND user_id = ${userId}
+        RETURNING favorite_id;
       `
       if (!deleteResponse.count) throw new ClientError('Request was unsuccessful', 400)
 

@@ -8,12 +8,15 @@ export default function LibrarySong(props) {
   const {
     title,
     song_id,
+    favorite_id,
     selectSong,
-    deleteSong,
+    deleteCb,
     isOpen,
     provider_name,
     video_id,
-    genre
+    genre,
+    username,
+    view
   } = props
   return (
     <div
@@ -62,11 +65,21 @@ export default function LibrarySong(props) {
                       <th scope="row">Genre</th>
                       <td>{genre}</td>
                     </tr>
+                    {
+                      view === 'Uploads'
+                        ? null
+                        : (
+                          <tr>
+                            <th scope="row">User</th>
+                            <td className="text-capitalize">{username}</td>
+                          </tr>
+                        )
+                    }
                   </tbody>
                 </table>
                 <div
                   className='delete-button d-flex justify-content-center align-items-center m-1 mx-auto'
-                  onClick={e => deleteSong(e, song_id)}
+                  onClick={e => deleteCb(e, view === 'Uploads' ? song_id : favorite_id)}
                 >
                   Delete
                 </div>
