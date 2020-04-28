@@ -16,14 +16,10 @@ export default class Index extends Component {
   }
 
   render() {
-    const signUpButtonStyle = {
-      display: 'flex',
-      justifyContent: 'flex-end'
-    }
     return (
-      <Container>
+      <Container className="login-container">
         <Row>
-          <Col xs='12' style={{ marginTop: '2rem' }}>
+          <Col xs='12' className="mt-2">
             <BigButton
               content='/images/logo.png'
               color='blue'
@@ -32,27 +28,24 @@ export default class Index extends Component {
             />
           </Col>
         </Row>
-        <Row>
-          <Col xs='12'>
-            <Col xs='6'>
-              <BigButton
-                content='Login'
-                color='blue'
-                link={'login'}
-                image={false}
-              />
-            </Col>
+        <Row className="login-button-container">
+          <Col xs='6'>
+            <BigButton
+              content='Login'
+              color='blue'
+              link={'login'}
+              image={false}
+              className="login-button"
+            />
           </Col>
-          <Col xs='12' style={signUpButtonStyle}>
-            <Col xs="6" />
-            <Col xs='6' style={{ marginRight: '2rem' }}>
-              <BigButton
-                content='Sign Up'
-                color='purple'
-                link={'/signup'}
-                image={false}
-              />
-            </Col>
+          <Col xs='6'>
+            <BigButton
+              content='Sign Up'
+              color='purple'
+              link={'/signup'}
+              image={false}
+              className="login-button"
+            />
           </Col>
         </Row>
       </Container>

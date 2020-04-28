@@ -58,6 +58,19 @@ class MyApp extends App {
             .hidden {
               display: none
             }
+
+            @media (min-width: 375px) {
+              .login-button-container {
+                height: 60vh;
+                align-items: flex-end
+              }
+             @media (min-width: 768px) {
+              .login-container {
+                height: 97vh;
+              }
+             }
+              .
+            }
             `}
         </style>
       </div>
