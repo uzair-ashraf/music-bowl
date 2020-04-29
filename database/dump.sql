@@ -253,6 +253,28 @@ ALTER TABLE ONLY public.users ALTER COLUMN user_id SET DEFAULT nextval('public.u
 --
 
 COPY public.favorites (song_id, user_id, favorite_id) FROM stdin;
+70	37	13
+129	37	14
+79	37	15
+20	37	16
+80	37	17
+75	37	18
+72	37	19
+98	37	20
+85	37	21
+93	1	22
+98	1	23
+94	1	24
+88	1	25
+85	1	26
+90	1	27
+84	1	28
+101	1	29
+100	1	30
+91	1	31
+96	1	32
+87	1	33
+2	26	35
 \.
 
 
@@ -355,6 +377,10 @@ Pachelbel's Canon	https://www.youtube.com/watch?v=stCKjZniMsQ&list=PL4FJJw7rbiIJ
 Vivaldi: Concerto for 4 Violins in B minor RV 580	https://www.youtube.com/watch?v=SY3Kxf7ZTeI&list=PL4FJJw7rbiIJkALPq6SY0_s1i2fE3NMYU&index=3	1	4	31	129	SY3Kxf7ZTeI
 Antonio Vivaldi - The Four Seasons| Антонио Вивальди - Времена года	https://www.youtube.com/watch?v=VG6j4Kp72wM&list=PL4FJJw7rbiIJkALPq6SY0_s1i2fE3NMYU&index=4	1	4	31	130	VG6j4Kp72wM
 Dominic Miller - Air on a G string - JS Bach HD	https://www.youtube.com/watch?v=311usK62JOA&list=PL4FJJw7rbiIJkALPq6SY0_s1i2fE3NMYU&index=5	1	4	31	131	311usK62JOA
+J. Cole - MIDDLE CHILD	https://www.youtube.com/watch?v=WILNIXZr2oc	1	7	1	164	WILNIXZr2oc
+G2, Paloalto & Huckleberry P - Rapflicks	https://www.youtube.com/watch?v=HhgVhdZvmjI&list=RDMM5SejM_hBvMM&index=3	1	7	1	166	HhgVhdZvmjI
+Powfu - The Story Of The Paper Boy	https://www.youtube.com/watch?v=_N_vBuP7FB8&list=RD0QuPtERPLo0&index=11	1	7	1	170	_N_vBuP7FB8
+bae robins - your i love you... (ft. powfu)	https://m.youtube.com/watch?v=Td0JOW3VY_I&list=RDMMTd0JOW3VY_I&start_radio=1	1	7	26	172	Td0JOW3VY_I
 \.
 
 
@@ -377,10 +403,13 @@ unknown	$2b$12$jxEsH0PU5FJjc91kILJ/0eQmBUHShVLkqyaP3sPcf8pxhToixvtam	999@999.com
 cloud	$2b$12$OFmkHpFdtf2HQ238Jnihc.LSo4VSbZVUU6btxuJQgXdyeHLEuRxlW	0111@111.com	/images/default-user-image.png	38
 ziggy	$2b$12$d30.JmuOYZDX5v2CPfdL6uYRu0zXIOLJ4QhovrUkmiHye2REaVsPq	022@111.com	/images/default-user-image.png	39
 slapstick	$2b$12$sXzRBRNpYsXbec6bhS5HTOb26AcuZCi0u4SCnEJanXK2baKO5CF8G	111@111.com	https://ashraf-bucket.s3.us-east-2.amazonaws.com/5d504a90-7e08-4d60-91f4-ebcc3aa213f31-10918_music-notes-high-quality-png-web-icons-png.png	28
-wetrix	$2b$12$.Uh9iNJbOVSaro0PsTNEKOr4BPRHcuSPfXwEY4GCZ4ANCrPkicqV.	wetrix101@gmail.com	https://ashraf-bucket.s3.us-east-2.amazonaws.com/96ec0c05-e4d0-4c19-a423-bb1b6b6cad401524406564576.jpg	26
 daredevil	$2b$12$WNa39/jDLCWSJdpDesZs9ePbj0BnMvujQWoI81iOvqX05g8st4dOS	222@222.com	https://ashraf-bucket.s3.us-east-2.amazonaws.com/7942398d-e2a2-4565-a735-9a2f734d9324sending-hugs.gif	30
 guard	$2b$12$pz16Ysc8HPkmmftA4RL65eZtuvDuXX.70fRT3d3Y/29oudP5p7coq	333@333.com	https://ashraf-bucket.s3.us-east-2.amazonaws.com/0fe6fc56-7b79-4775-ac10-ef7be884a658whaa.png	31
 thebearingedge	$2b$12$LeUTnTV7MPtQ.GaxChoqA.LlIQJ2qLHVyLC54t3kK1BnlQyM0hSYa	thebearingedge@gmail.com	/images/default-user-image.png	41
+wetrix	$2b$12$.Uh9iNJbOVSaro0PsTNEKOr4BPRHcuSPfXwEY4GCZ4ANCrPkicqV.	wetrix101@gmail.com	https://ashraf-bucket.s3.us-east-2.amazonaws.com/fdd6742d-0b35-4a90-9157-7ba735e640c96B5DFE46-BC9D-4C1A-9947-C86C0795EC6B.jpeg	26
+naruto	$2b$12$MqL5kmKD3nzYuyrGW6eaDu.TNjiwbq/Y2Y7BCYFfCGVj03yCp5WzS	narutorun@live.com	https://ashraf-bucket.s3.us-east-2.amazonaws.com/db8991d1-4b3f-4363-8a42-1b07771749c2AFA81D08-B729-4F95-9662-C99555FDAF3C.gif	42
+taniaashraf	$2b$12$NVuP8V4qx6YrPOA2qlMuXuk4U9h89IwWrrzZv0r1oDC0i/spO0ynG	taniaashraf645@gmail.com	/images/default-user-image.png	43
+Humaashraf	$2b$12$8JpfBkKUGA6K1zKLEDo.Q.zsApecgpIse150rCkJxctwwy6cODyWS	humahuma@yahoo.com	/images/default-user-image.png	44
 \.
 
 
@@ -388,7 +417,7 @@ thebearingedge	$2b$12$LeUTnTV7MPtQ.GaxChoqA.LlIQJ2qLHVyLC54t3kK1BnlQyM0hSYa	theb
 -- Name: favorites_favorite_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dev
 --
 
-SELECT pg_catalog.setval('public.favorites_favorite_id_seq', 1, false);
+SELECT pg_catalog.setval('public.favorites_favorite_id_seq', 35, true);
 
 
 --
@@ -409,14 +438,14 @@ SELECT pg_catalog.setval('public.providers_provider_id_seq', 2, true);
 -- Name: songs_song_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dev
 --
 
-SELECT pg_catalog.setval('public.songs_song_id_seq', 163, true);
+SELECT pg_catalog.setval('public.songs_song_id_seq', 173, true);
 
 
 --
 -- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dev
 --
 
-SELECT pg_catalog.setval('public.users_user_id_seq', 41, true);
+SELECT pg_catalog.setval('public.users_user_id_seq', 44, true);
 
 
 --
