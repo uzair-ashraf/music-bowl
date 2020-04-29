@@ -188,7 +188,6 @@ export default class Upload extends Component {
                         <YouTube
                           videoId={validatedUrl.videoId}
                           opts={{
-                            height: '160',
                             width: '100%'
                           }}
                           onReady={this.extractYoutubeData}

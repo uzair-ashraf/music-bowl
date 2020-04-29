@@ -64,12 +64,22 @@ class MyApp extends App {
                 height: 60vh;
                 align-items: flex-end
               }
+              iframe {
+                height: 160px !important
+              }
              @media (min-width: 768px) {
               .login-container {
                 height: 97vh;
               }
+              iframe {
+                height: 470px !important
+              }
              }
-              .
+              @media (min-width: 1024px) {
+              iframe {
+                height: 282px !important
+              }
+             }
             }
             `}
         </style>
