@@ -42,6 +42,7 @@ export default function MedButton(props) {
           position: relative;
           height: 128px;
           width: 128px;
+          -webkit-appearance: none;
         }
         .swirl-subheading {
           position: absolute;

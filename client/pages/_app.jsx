@@ -55,6 +55,9 @@ class MyApp extends App {
               border-radius: 19px;
               height: 83vh;
             }
+            .swirl-button:hover {
+              cursor: pointer;
+            }
             .hidden {
               display: none
             }
