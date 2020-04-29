@@ -188,7 +188,11 @@ export default class Discover extends Component {
                   />
                 </div>
                 <Row>
-                  <Col xs='6'
+                  <Col
+                  xs='6'
+                  sm='4'
+                  md='3'
+                  lg='2'
                   >
                     <GenreButton
                       onClick={this.setGenre}
@@ -197,7 +201,11 @@ export default class Discover extends Component {
                       genreId="all"
                     />
                   </Col>
-                  <Col xs='6'
+                  <Col
+                  xs='6'
+                  sm='4'
+                  md='3'
+                  lg='2'
                   >
                     <GenreButton
                       onClick={this.setGenre}
@@ -208,7 +216,11 @@ export default class Discover extends Component {
                   </Col>
                   {
                     genres.map((genre, index) => (
-                      <Col xs='6'
+                      <Col
+                      xs='6'
+                      sm='4'
+                      md='3'
+                      lg='2'
                         key={genre.genre_id}
                       >
                         <GenreButton
